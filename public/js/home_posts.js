@@ -74,24 +74,7 @@ let post_data = [
 ]
 
 // $.get('http://13.125.236.152:8080/api/home/tech-post').then((result) => {
-//     result.forEach(post => {
-//         post_template = `
-//         <li class="list-group-item">
-//         <div class="row">
-//             <div class="col-8 post-title text-center">${post.title}</div>
-//             <div class="row col-4">
-//                 <div class="w-50 text-center">
-//                     <span class="user-name">${post.user}</span>
-//                 </div>
-//                 <div class="w-50 text-center">
-//                     <span class="created-date">${post.date}</span>
-//                 </div>
-//             </div>
-//         </div>
-//         </li>`;
-
-//         list_position.append(post_template)
-//     });
+//     post_data = JSON.parse(result);
 // })
 
 post_data.forEach(post => {
@@ -112,5 +95,5 @@ post_data.forEach(post => {
             </div>
             </li>`;
 
-    list_position.append(post_template)
+    list_position.append(post_template);
 });
