@@ -30,70 +30,27 @@ let post_template = `
 </div>
 </li>`;
 
-let post_data = [
-    {
-        "title": "김재민의 편지15",
-        "user": "한승규",
-        "date": "2023-07-23 00:52:57.0"
-    },
-    {
-        "title": "김재민의 편지15",
-        "user": "한승규",
-        "date": "2023-07-23 00:52:57.0"
-    },
-    {
-        "title": "김재민의 편지15",
-        "user": "한승규",
-        "date": "2023-07-23 00:52:57.0"
-    },
-    {
-        "title": "김재민의 편지15",
-        "user": "한승규",
-        "date": "2023-07-23 00:52:57.0"
-    },
-    {
-        "title": "김재민의 편지15",
-        "user": "한승규",
-        "date": "2023-07-23 00:52:57.0"
-    },
-    {
-        "title": "김재민의 편지15",
-        "user": "한승규",
-        "date": "2023-07-23 00:52:57.0"
-    },
-    {
-        "title": "김재민의 편지15",
-        "user": "한승규",
-        "date": "2023-07-23 00:52:57.0"
-    },
-    {
-        "title": "김재민의 편지15",
-        "user": "한승규",
-        "date": "2023-07-23 00:52:57.0"
-    }
-]
+$.get('http://13.125.236.152:8080/api/home/tech-post').then((result) => {
+    result.forEach(post => {
+        post.date = StringToDate(post.date, 0);
 
-// $.get('http://13.125.236.152:8080/api/home/tech-post').then((result) => {
-//     post_data = JSON.parse(result);
-// })
-
-post_data.forEach(post => {
-    post.date = StringToDate(post.date, 0);
-
-    post_template = `
-            <li class="list-group-item">
-            <div class="row">
-                <div class="col-8 post-title">${post.title}</div>
-                <div class="row col-4">
-                    <div class="text-center" style="width: 60%;">
-                        <span class="user-name">${post.user}</span>
-                    </div>
-                    <div class="text-center" style="width: 40%;">
-                        <span class="created-date">${post.date}</span>
+        post_template = `
+                <li class="list-group-item">
+                <div class="row">
+                    <div class="col-8 post-title">${post.title}</div>
+                    <div class="row col-4">
+                        <div class="text-center" style="width: 60%;">
+                            <span class="user-name">${post.user}</span>
+                        </div>
+                        <div class="text-center" style="width: 40%;">
+                            <span class="created-date">${post.date}</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            </li>`;
+                </li>`;
 
-    list_position.append(post_template);
-});
+        list_position.append(post_template);
+    });
+})
+
+
