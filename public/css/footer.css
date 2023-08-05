@@ -1,0 +1,41 @@
+footer {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    border-top: 1px #ddd solid;
+    display: flex;
+    z-index: 10;
+}
+
+.footer-inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 50px;
+}
+
+.footer-right {
+    position: absolute;
+    right: 0%;
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+.footer-icons {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+.footer-icons li {
+    list-style: none;
+    list-style-position: inside;
+    font-size: 30px;
+    margin-left: 10px;
+}
+
+.footer-icons li a {
+    color: black;
+}
