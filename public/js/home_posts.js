@@ -15,26 +15,11 @@ function StringToDate(date, n) {
         "-" + (stringNewDate.getDate() > 9 ? stringNewDate.getDate().toString() : "0" + stringNewDate.getDate().toString());
 }
 
-let post_template = `
-<li class="list-group-item">
-<div class="row">
-    <div class="col-8 post-title">TITLE</div>
-    <div class="row col-4">
-        <div class="text-center" style="width: 60%;">
-            <span class="user-name">USER</span>
-        </div>
-        <div class="text-center" style="width: 40%;">
-            <span class="created-date">DATE</span>
-        </div>
-    </div>
-</div>
-</li>`;
-
 $.get('http://13.125.236.152:8080/api/home/tech-post').then((result) => {
     result.forEach(post => {
         post.date = StringToDate(post.date, 0);
 
-        post_template = `
+        let post_template = `
                 <li class="list-group-item">
                 <div class="row">
                     <div class="col-8 post-title">${post.title}</div>
@@ -53,4 +38,17 @@ $.get('http://13.125.236.152:8080/api/home/tech-post').then((result) => {
     });
 })
 
-
+// template //
+// <li class="list-group-item">
+// <div class="row">
+//     <div class="col-8 post-title">TITLE</div>
+//     <div class="row col-4">
+//         <div class="text-center" style="width: 60%;">
+//             <span class="user-name">USER</span>
+//         </div>
+//         <div class="text-center" style="width: 40%;">
+//             <span class="created-date">DATE</span>
+//         </div>
+//     </div>
+// </div>
+// </li>

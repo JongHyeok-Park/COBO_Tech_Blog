@@ -4,11 +4,11 @@ $.get('http://13.125.236.152:8080/api/home/project').then((result) => {
     for (let i = 0; i < 3; i++) {
         count = (i * 6);
         result.forEach(item => {
-            template = `
+            let template = `
             <div class="slide-item">
                 <div class="card m-auto" style="width: 18rem;">
-                    <img src="https://t3.ftcdn.net/jpg/02/15/15/46/360_F_215154625_hJg9QkfWH9Cu6LCTUc8TiuV6jQSI0C5X.jpg"
-                        class="card-img-top" alt="...">
+                    <img src="${item.imgUrl}"
+                        class="card-img-top" alt="https://t3.ftcdn.net/jpg/02/15/15/46/360_F_215154625_hJg9QkfWH9Cu6LCTUc8TiuV6jQSI0C5X.jpg">
                     <div class="card-body">
                         <h5 class="card-title">${item.title}</h5>
                         <p class="card-text">${item.brief_content}</p>
@@ -20,7 +20,7 @@ $.get('http://13.125.236.152:8080/api/home/project').then((result) => {
 
             $('.silde-items-list').append(template);
             item.skillTag.forEach((tag) => {
-                $('.card-tag').eq(count).append(`<span class="badge text-bg-danger">${tag}</span>`)
+                $('.card-tag').eq(count).append(`<span class="badge text-bg-secondary rounded-pill me-1" data-tag="${tag}">${tag}</span>`)
             });
             count += 1;
         });

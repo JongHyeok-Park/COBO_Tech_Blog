@@ -58,3 +58,34 @@
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
 }
+
+/* Badge Setting */
+.badge[data-tag="JavaScript"] {
+    background-color: #F7DF1E !important;
+    color: black !important;
+}
+
+.badge[data-tag="SpringBoot"] {
+    background-color: #6DB33F !important;
+    color: white !important;
+}
+
+.badge[data-tag="MySQL"] {
+    background-color: #4479A1 !important;
+    color: white !important;
+}
+
+.badge[data-tag="HTML5"] {
+    background-color: #E34F26 !important;
+    color: white !important;
+}
+
+.badge[data-tag="CSS3"] {
+    background-color: #1572B6 !important;
+    color: white !important;
+}
+
+.badge[data-tag="Docker"] {
+    background-color: #2496ED !important;
+    color: white !important;
+}
