@@ -1,4 +1,4 @@
-$.get('http://13.125.236.152:8080/api/home/project').then((result) => {
+$.get(ServerURL + '/api/home/project').then((result) => {
     let count = 0;
 
     for (let i = 0; i < 3; i++) {

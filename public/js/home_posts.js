@@ -15,7 +15,7 @@ function StringToDate(date, n) {
         "-" + (stringNewDate.getDate() > 9 ? stringNewDate.getDate().toString() : "0" + stringNewDate.getDate().toString());
 }
 
-$.get('http://13.125.236.152:8080/api/home/tech-post').then((result) => {
+$.get(ServerURL + '/api/home/tech-post').then((result) => {
     result.forEach(post => {
         post.date = StringToDate(post.date, 0);
 
