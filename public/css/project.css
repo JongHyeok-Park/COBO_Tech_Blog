@@ -1,0 +1,114 @@
+.projects-container {
+    width: 1200px;
+    min-height: 600px;
+    margin: auto;
+}
+
+.project-item {
+    width: 600px;
+}
+
+.card {
+    width: 540px;
+    overflow: hidden;
+    box-shadow: 5px 5px 5px lightgrey;
+    border: none;
+    border-radius: 0px;
+    transition: all 0.3s;
+}
+
+.card:hover {
+    cursor: pointer;
+    scale: 1.03;
+}
+
+.card-url {
+    text-decoration: none;
+    color: black;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.user-img-container {
+    display: inline-block;
+}
+
+.user-list {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.user-img {
+    width: 1.5rem;
+    border-radius: 100%;
+    margin-right: 0.2rem;
+}
+
+.card-text {
+    margin-top: 1rem;
+    height: 6rem;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+}
+
+.card-tag {
+    height: 1.5rem;
+}
+
+.page-seletor {
+    margin: 20px 0px;
+    text-align: center;
+}
+
+.page-seletor span:hover {
+    cursor: pointer;
+}
+
+.selector-number {
+    list-style: none;
+    display: inline-block;
+    padding: 0;
+}
+
+.selector-number li {
+    display: inline-block;
+    margin: 5px;
+    color: #777;
+}
+
+.selector-number .active {
+    color: black;
+}
+
+.selector-number li:hover {
+    cursor: pointer;
+}
+
+.after,
+.before {
+    display: none;
+}
+
+@media screen and (max-width: 1200px) {
+    .projects-container {
+        width: 100%;
+    }
+
+    .project-item {
+        width: 100%;
+    }
+
+    .card {
+        width: 540px;
+    }
+}
