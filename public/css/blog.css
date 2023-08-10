@@ -1,0 +1,99 @@
+.list-group-item {
+    padding: 30px 20px;
+}
+
+.item-title {
+    margin-bottom: 10px;
+
+}
+
+.item-title a {
+    text-decoration: none;
+    color: black;
+}
+
+.user-image {
+    width: 3rem;
+    float: left;
+    margin-right: 10px;
+}
+
+.user-image img {
+    width: 100%;
+    border-radius: 100%;
+}
+
+.user-info {
+    display: inline-block;
+}
+
+.user-name {
+    font-weight: 700;
+}
+
+.created-date {
+    color: grey;
+}
+
+.user-description {
+    display: block;
+    color: grey;
+}
+
+.item-content {
+    margin: 10px 0px;
+    height: 4.5rem;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.item-content a {
+    text-decoration: none;
+    color: black;
+}
+
+.tag-list-container {
+    padding: 30px;
+    height: 1rem;
+}
+
+.tag-list-container .badge {
+    margin: 2px 2px;
+}
+
+.page-seletor {
+    margin: 20px 0px;
+    text-align: center;
+}
+
+.page-seletor span:hover {
+    cursor: pointer;
+}
+
+.selector-number {
+    list-style: none;
+    display: inline-block;
+    padding: 0;
+}
+
+.selector-number li {
+    display: inline-block;
+    margin: 5px;
+    color: #777;
+}
+
+.selector-number .active {
+    color: black;
+}
+
+.selector-number li:hover {
+    cursor: pointer;
+}
+
+.after,
+.before {
+    display: none;
+}
