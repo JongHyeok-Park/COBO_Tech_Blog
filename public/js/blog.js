@@ -73,7 +73,7 @@ function loadPosts(page) {
 
 function loadPages() {
     $.get(ServerURL + "/api/tech/count").then((result) => {
-        posttNum = result;
+        postNum = result;
         totalPages = parseInt((postNum - 1) / pageSize) + 1;
         pageSelector.html("");
 

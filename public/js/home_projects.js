@@ -11,7 +11,7 @@ $.get(ServerURL + '/api/home/project').then((result) => {
                         class="card-img-top" alt="https://t3.ftcdn.net/jpg/02/15/15/46/360_F_215154625_hJg9QkfWH9Cu6LCTUc8TiuV6jQSI0C5X.jpg">
                     <div class="card-body">
                         <h5 class="card-title">${item.title}</h5>
-                        <p class="card-text">${item.brief_content}</p>
+                        <p class="card-text">${item.description}</p>
                         <div class="card-tag"></div>
                     </div>
                 </div>
