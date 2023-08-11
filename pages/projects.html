@@ -12,6 +12,11 @@
     <link rel="stylesheet" href="../public/css/footer.css">
     <link rel="stylesheet" href="../public/css/project.css">
     <link rel="stylesheet" href="../public/css/badge.css">
+    <link rel="stylesheet" href="../public/css/modal.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown-light.min.css"
+        integrity="sha512-bm684OXnsiNuQSyrxuuwo4PHqr3OzxPpXyhT66DA/fhl73e1JmBxRKGnO/nRwWvOZxJLRCmNH7FII+Yn1JNPmg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- favicon -->
     <link rel="apple-touch-icon" sizes="57x57" href="../public/image/favicon/apple-icon-57x57.png">
@@ -31,10 +36,30 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="../public/image/favicon/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
+
+    <script type="module" src="https://md-block.verou.me/md-block.js"></script>
 </head>
 
 <body>
     <div id="custom-navbar"></div>
+
+    <div class="project-modal">
+        <div class="project-modal-background"></div>
+        <div class="project-modal-container">
+            <div class="project-modal-headbar">
+                <div class="headbar-container">
+                    <span class="modal-close">
+                        <i class="fa-solid fa-xmark fa-2x"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="project-modal-content markdown-body">
+                <md-block src="...">
+
+                </md-block>
+            </div>
+        </div>
+    </div>
 
 
     <div class="container py-5">
@@ -68,6 +93,7 @@
     <script src="../public/js/navbar.js"></script>
     <script src="../public/js/footer.js"></script>
     <script src="../public/js/project.js"></script>
+    <script src="../public/js/modal.js"></script>
 </body>
 
 </html>

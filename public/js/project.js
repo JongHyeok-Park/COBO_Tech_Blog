@@ -84,6 +84,17 @@ function loadProjects(page) {
 
             container.append(template);
         });
+
+        $('.project-item').click(function (e) {
+            modal.css('transition', 'all 0.5s');
+            modal.css('visibility', 'visible');
+            setTimeout(function () {
+                modal.css('opacity', '1');
+            }, 100)
+            setTimeout(function () {
+                modal.css('transition', 'none');
+            }, 600);
+        })
     });
 }
 

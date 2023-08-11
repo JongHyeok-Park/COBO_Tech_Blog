@@ -21,12 +21,23 @@ function toDate(date) {
         "-" + (stringNewDate.getDate() > 9 ? stringNewDate.getDate().toString() : "0" + stringNewDate.getDate().toString());
 }
 
-function toTagList(tags) {
+function toTag(tags) {
     let tagTemplate = "";
 
     tags.forEach(tag => {
         tagTemplate = tagTemplate + `<span class="badge text-bg-secondary rounded-pill me-1"
         data-tag="${tag}">${tag}</span>`;
+    });
+
+    return tagTemplate;
+}
+
+function toTagList(tags) {
+    let tagTemplate = "";
+
+    tags.forEach(tag => {
+        tagTemplate = tagTemplate + `<span class="badge text-bg-secondary rounded-pill me-1"
+        data-tag="${tag.name}" data-tag-id="${tag.id}">${tag.name}</span>`;
     });
 
     return tagTemplate;
@@ -40,7 +51,46 @@ function loadPosts(page) {
         posts.forEach(item => {
 
             item.createdAt = toDate(item.createdAt);
-            item.skillTag = toTagList(item.skillTag);
+            item.skillTag = toTag(item.skillTag);
+
+            let template =
+                `
+                <li class="list-group-item">
+                <h4 class="item-title"><a href="${item.url}">${item.title}</a></h4>
+                <div class="item-user">
+                    <div class="user-image"><img src="${item.user.imgUrl}"
+                            alt=""></div>
+                    <div class="user-info">
+                        <span class="user-name">${item.user.name}</span>
+                        <span class="created-date">${item.createdAt}</span>
+                        <span class="user-description">${item.user.description}</span>
+                    </div>
+                </div>
+                <p class="item-content">
+                    <a href="${item.url}">
+                        ${item.content}
+                    </a>
+                </p>
+                <div class="tag-container">
+                    ${item.skillTag}
+                </div>
+            </li>
+            `;
+
+            listContainer.append(template);
+        });
+    });
+}
+
+function loadTagPosts(page, tag) {
+    currentPage = page;
+
+    $.get(ServerURL + `/api/tech/posts-skilltag?page=${page}&size=${pageSize}&skillTagId=${tag}`).then((posts) => {
+        listContainer.html("");
+        posts.forEach(item => {
+
+            item.createdAt = toDate(item.createdAt);
+            item.skillTag = toTag(item.skillTag);
 
             let template =
                 `
@@ -155,6 +205,12 @@ $.get(ServerURL + '/api/tech/skillTags').then((tag) => {
     tag = toTagList(tag)
     tagListContainer.html('');
     tagListContainer.append(tag);
+
+    $('.tag-list .badge').click(function (e) {
+        let tagId = e.target.dataset.tagId;
+        currentPage = 1;
+        loadTagPosts(currentPage, tagId);
+    })
 })
 
 loadPosts(currentPage);

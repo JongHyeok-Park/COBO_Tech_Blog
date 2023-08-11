@@ -64,6 +64,10 @@
     margin: 2px 2px;
 }
 
+.tag-list-container .badge:hover {
+    cursor: pointer;
+}
+
 .page-seletor {
     margin: 20px 0px;
     text-align: center;
