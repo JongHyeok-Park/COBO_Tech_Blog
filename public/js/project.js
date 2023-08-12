@@ -1,5 +1,8 @@
 const container = $('.projects-container');
 const pageSelector = $('.selector-number');
+const modalTitle = $('.modal-title');
+const modalDate = $('.modal-date');
+const modalContent = $('md-block');
 const pageSize = 8;
 let currentPage = 1;
 let projectNum;
@@ -62,7 +65,7 @@ function loadProjects(page) {
 
             let template =
                 `
-            <div class="project-item col-6 my-3">
+            <div class="project-item col-6 my-3" data-id="${item.id}">
                 <div class="card m-auto">
                     <img src="${item.imgUrl}"
                         class="card-img-top"
@@ -86,6 +89,11 @@ function loadProjects(page) {
         });
 
         $('.project-item').click(function (e) {
+            $.get(ServerURL + `/api/project/project?projectId=${this.dataset.id}`).then((item) => {
+                modalTitle.html(item.title);
+                modalDate.html(toDate(item.created_at));
+                modalContent.attr('src', item.url);
+            })
             modal.css('transition', 'all 0.5s');
             modal.css('visibility', 'visible');
             setTimeout(function () {

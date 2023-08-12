@@ -16,30 +16,56 @@
 
 .project-modal-container {
     background-color: white;
-    width: 1300px;
-    height: 800px;
+    width: 1200px;
+    height: 650px;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 10px;
+    overflow: hidden;
 }
 
 .project-modal-headbar {
     height: 50px;
     border-bottom: solid #eee 1px;
-    padding: 10px;
+    padding: 10px 15px;
 }
 
 .headbar-container {
     width: 100%;
     height: 100%;
+}
+
+.headbar-left {
+    float: left;
+    width: 90%;
+}
+
+.headbar-right {
+    float: left;
+    height: 100%;
+    width: 10%;
     text-align: right;
+}
+
+.headbar-right::after {
+    content: "";
+    float: none;
+    clear: both;
+}
+
+.modal-title {
+    display: inline-block;
+}
+
+.modal-date {
+    margin-left: 5px;
+    color: grey;
 }
 
 .modal-close {
     color: grey;
-    text-align: right;
 }
 
 .modal-close:hover {
@@ -47,7 +73,7 @@
 }
 
 .project-modal-content {
-    height: 750px;
+    height: 600px;
     overflow-y: scroll;
-    padding: 50px 300px;
+    padding: 20px 50px;
 }
