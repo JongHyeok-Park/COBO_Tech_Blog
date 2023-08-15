@@ -3,7 +3,6 @@ $(document).ready(function () {
     $("#custom-navbar").load("../../pages/includes/navbar.html", function () {
         let path = window.location.pathname;
         let page = path.split("/").pop();
-        console.log(page);
 
         switch (page) {
             case "about.html":

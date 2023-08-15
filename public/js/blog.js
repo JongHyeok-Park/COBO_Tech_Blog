@@ -1,13 +1,15 @@
-const listContainer = $('.list-group');
+const listContainer = $('.item-list');
 const pageSelector = $('.selector-number');
 const tagListContainer = $('.tag-list');
 const pageSize = 10;
 let currentPage = 1;
+let currentTag = 0;
 let postNum;
 let totalPages;
 let startPage;
 let endPage;
 
+// 날짜 포매팅
 function toDate(date) {
     let yyyy = date.substring(0, 4);
     let mm = date.substring(4, 6);
@@ -21,6 +23,7 @@ function toDate(date) {
         "-" + (stringNewDate.getDate() > 9 ? stringNewDate.getDate().toString() : "0" + stringNewDate.getDate().toString());
 }
 
+// 블로그 리스트 안에 태그
 function toTag(tags) {
     let tagTemplate = "";
 
@@ -32,21 +35,28 @@ function toTag(tags) {
     return tagTemplate;
 }
 
+// 사이드바 태그 리스트
 function toTagList(tags) {
     let tagTemplate = "";
 
     tags.forEach(tag => {
-        tagTemplate = tagTemplate + `<span class="badge text-bg-secondary rounded-pill me-1"
-        data-tag="${tag.name}" data-tag-id="${tag.id}">${tag.name}</span>`;
+        tagTemplate = tagTemplate + `<li class="list-group-item skill-tag"
+        data-tag="${tag.name}" data-tag-id="${tag.id}">#${tag.name}</li>`;
     });
 
     return tagTemplate;
 }
 
+// 블로그 글들 불러오기
 function loadPosts(page) {
     currentPage = page;
 
-    $.get(ServerURL + `/api/tech/posts?page=${page}&size=${pageSize}`).then((posts) => {
+    $.get(ServerURL + `/api/tech/posts?page=${page}&size=${pageSize}&skillTagId=${currentTag}`).then((posts) => {
+        if (currentTag != 0) {
+            $('.skill-tag').removeClass('custom-active');
+            $('.skill-tag').eq(currentTag - 1).addClass('custom-active');
+        }
+
         listContainer.html("");
         posts.forEach(item => {
 
@@ -55,74 +65,36 @@ function loadPosts(page) {
 
             let template =
                 `
-                <li class="list-group-item">
-                <h4 class="item-title"><a href="${item.url}">${item.title}</a></h4>
-                <div class="item-user">
-                    <div class="user-image"><img src="${item.user.imgUrl}"
-                            alt=""></div>
-                    <div class="user-info">
-                        <span class="user-name">${item.user.name}</span>
-                        <span class="created-date">${item.createdAt}</span>
-                        <span class="user-description">${item.user.description}</span>
+                    <li class="list-group-item">
+                    <h4 class="item-title"><a href="/post.html?id=${item.id}">${item.title}</a></h4>
+                    <div class="item-user">
+                        <div class="user-image"><img src="${item.user.imgUrl}"
+                                alt=""></div>
+                        <div class="user-info">
+                            <span class="user-name">${item.user.name}</span>
+                            <span class="created-date">${item.createdAt}</span>
+                            <span class="user-description">${item.user.description}</span>
+                        </div>
                     </div>
-                </div>
-                <p class="item-content">
-                    <a href="${item.url}">
-                        ${item.content}
-                    </a>
-                </p>
-                <div class="tag-container">
-                    ${item.skillTag}
-                </div>
-            </li>
-            `;
+                    <p class="item-content">
+                        <a href="/post.html?id=${item.id}">
+                            ${item.content}
+                        </a>
+                    </p>
+                    <div class="tag-container">
+                        ${item.skillTag}
+                    </div>
+                </li>
+                `;
 
             listContainer.append(template);
         });
     });
 }
 
-function loadTagPosts(page, tag) {
-    currentPage = page;
-
-    $.get(ServerURL + `/api/tech/posts-skilltag?page=${page}&size=${pageSize}&skillTagId=${tag}`).then((posts) => {
-        listContainer.html("");
-        posts.forEach(item => {
-
-            item.createdAt = toDate(item.createdAt);
-            item.skillTag = toTag(item.skillTag);
-
-            let template =
-                `
-                <li class="list-group-item">
-                <h4 class="item-title"><a href="${item.url}">${item.title}</a></h4>
-                <div class="item-user">
-                    <div class="user-image"><img src="${item.user.imgUrl}"
-                            alt=""></div>
-                    <div class="user-info">
-                        <span class="user-name">${item.user.name}</span>
-                        <span class="created-date">${item.createdAt}</span>
-                        <span class="user-description">${item.user.description}</span>
-                    </div>
-                </div>
-                <p class="item-content">
-                    <a href="${item.url}">
-                        ${item.content}
-                    </a>
-                </p>
-                <div class="tag-container">
-                    ${item.skillTag}
-                </div>
-            </li>
-            `;
-
-            listContainer.append(template);
-        });
-    });
-}
-
+// 페이지 넘버링
 function loadPages() {
-    $.get(ServerURL + "/api/tech/count").then((result) => {
+    $.get(ServerURL + `/api/tech/count?skillTagId=${currentTag}`).then((result) => {
         postNum = result;
         totalPages = parseInt((postNum - 1) / pageSize) + 1;
         pageSelector.html("");
@@ -206,12 +178,15 @@ $.get(ServerURL + '/api/tech/skillTags').then((tag) => {
     tagListContainer.html('');
     tagListContainer.append(tag);
 
-    $('.tag-list .badge').click(function (e) {
+    $('.tag-list .skill-tag').click(function (e) {
         let tagId = e.target.dataset.tagId;
+        currentTag = tagId;
         currentPage = 1;
-        loadTagPosts(currentPage, tagId);
+        loadPosts(currentPage);
+        loadPages();
     })
 })
 
 loadPosts(currentPage);
 loadPages();
+

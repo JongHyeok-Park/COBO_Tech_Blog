@@ -1,4 +1,4 @@
-.list-group-item {
+.item-list .list-group-item {
     padding: 30px 20px;
 }
 
@@ -100,4 +100,22 @@
 .after,
 .before {
     display: none;
+}
+
+.skill-tag {
+    border: none;
+    font-weight: 500;
+    color: grey;
+    transition: all 1s;
+}
+
+.skill-tag:hover {
+    cursor: pointer;
+    color: black;
+    /* scale: 1.1; */
+}
+
+.tag-list .custom-active {
+    color: black;
+    scale: 1.1;
 }
