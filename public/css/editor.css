@@ -1,0 +1,58 @@
+#title {
+    width: 100%;
+}
+
+.editor-title {
+    height: 50px;
+}
+
+.editor {
+    width: 100%;
+    min-height: 600px;
+}
+
+.editor img {
+    max-width: 500px;
+    max-height: 500px;
+    padding: 10px;
+    margin: auto;
+    display: block;
+}
+
+.editor:focus-visible {
+    outline: none;
+}
+
+.editor-menu button:hover {
+    filter: brightness(90%);
+}
+
+.editor-menu button:active {
+    color: grey;
+}
+
+.editor-menu button {
+    border: none;
+    border-radius: 5px;
+    padding: .375rem .75rem;
+}
+
+ol {
+    margin-top: 1rem;
+}
+
+#img-selector {
+    display: none;
+}
+
+.form-select {
+    width: 100px;
+    display: inline-block;
+}
+
+blockquote {
+    background: #eee;
+    border-radius: 5px;
+    margin: 16px 0;
+    padding: 15px;
+}
