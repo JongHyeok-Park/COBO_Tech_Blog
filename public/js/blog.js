@@ -157,6 +157,7 @@ function loadPages() {
             currentPage = pageNum;
             loadPosts(currentPage);
             loadPages();
+            window.scrollTo({ top: 0, behavior: "smooth" });
         })
     });
 }
@@ -165,12 +166,14 @@ $('.after').click(function () {
     currentPage = currentPage + 1;
     loadPosts(currentPage);
     loadPages();
+    window.scrollTo({ top: 0, behavior: "smooth" });
 })
 
 $('.before').click(function () {
     currentPage = currentPage - 1;
     loadPosts(currentPage);
     loadPages();
+    window.scrollTo({ top: 0, behavior: "smooth" });
 })
 
 $.get(ServerURL + '/api/tech/skillTags').then((tag) => {
@@ -184,6 +187,7 @@ $.get(ServerURL + '/api/tech/skillTags').then((tag) => {
         currentPage = 1;
         loadPosts(currentPage);
         loadPages();
+        window.scrollTo({ top: 0, behavior: "smooth" });
     })
 })
 

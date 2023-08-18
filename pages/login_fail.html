@@ -4,15 +4,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CoBo Developers - Home</title>
+    <title>로그인할 수 없습니다.</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="../public/css/font.css">
     <link rel="stylesheet" href="../public/css/navbar.css">
     <link rel="stylesheet" href="../public/css/footer.css">
-    <link rel="stylesheet" href="../public/css/font.css">
-    <link rel="stylesheet" href="../public/css/slide.css">
-    <link rel="stylesheet" href="../public/css/banner.css">
-    <link rel="stylesheet" href="../public/css/badge.css">
+    <link rel="stylesheet" href="../public/css/login-fail.css">
 
     <!-- favicon -->
     <link rel="apple-touch-icon" sizes="57x57" href="../public/image/favicon/apple-icon-57x57.png">
@@ -37,54 +35,18 @@
 <body>
     <div id="custom-navbar"></div>
 
-    <div class="w-100 d-flex justify-content-center align-items-center banner">
-        <h1 class="text-center" style="color: white; font-weight: 900; font-size: 50px;">
-            CoBo<br>Developers</h1>
-    </div>
-
     <div class="container py-5">
-        <!-- 이미지 슬라이드 -->
-        <h3 class="mt-5" style="font-weight: 700;">Projects</h3>
-        <p>기가 막힌 프로젝트 목록입니다.</p>
-        <div class="slide-container mb-5">
-            <div class="silde-items-container">
-                <div class="silde-items-list">
-                    <!-- slide-item -->
-                </div>
+        <div class="alert-container">
+            <div class="alert-container-inner">
+                <i class="fa-solid fa-circle-exclamation fa-3x"></i>
+                <h3>로그인할 수 없습니다.</h3>
+                <p>로그인할 수 없습니다. 관리자에게 문의하세요.</p>
+                <button onclick="window.location.assign('/')">돌아가기</button>
             </div>
-            <button class="control-prev" type="button">
-                <span><i class="fa-solid fa-chevron-left"></i></span>
-            </button>
-            <button class="control-next" type="button">
-                <span><i class="fa-solid fa-chevron-right"></i></span>
-            </button>
-        </div>
-
-        <!-- 블로그 게시물 -->
-        <h3 class="mt-5" style="font-weight: 700;">Tech Posts</h3>
-        <p>기가 막힌 블로그 목록입니다.</p>
-        <div class="border-top border-bottom mb-5">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                    <div class="row fw-bold">
-                        <div class="col-8 post-title text-center">제목</div>
-                        <div class="row col-4">
-                            <div class="text-center" style="width: 60%;"">
-                                <span class=" user-name">작성자</span>
-                            </div>
-                            <div class="text-center" style="width: 40%;">
-                                <span class="created-date">작성일</span>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <!-- list-group-item -->
-            </ul>
         </div>
     </div>
 
-
-    <footer class="custom-footer"></footer>
+    <footer id="custom-footer"></footer>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"
         integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
@@ -100,9 +62,6 @@
     <script src="../public/js/server.js"></script>
     <script src="../public/js/navbar.js"></script>
     <script src="../public/js/footer.js"></script>
-    <script src="../public/js/home_projects.js"></script>
-    <script src="../public/js/slide.js"></script>
-    <script src="../public/js/home_posts.js"></script>
 </body>
 
 </html>

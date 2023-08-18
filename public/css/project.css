@@ -68,6 +68,7 @@
 .page-seletor {
     margin: 20px 0px;
     text-align: center;
+    font-weight: 500;
 }
 
 .page-seletor span:hover {
@@ -82,7 +83,7 @@
 
 .selector-number li {
     display: inline-block;
-    margin: 5px;
+    margin: 10px;
     color: #777;
 }
 
@@ -96,6 +97,7 @@
 
 .after,
 .before {
+    margin: 10px;
     display: none;
 }
 

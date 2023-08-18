@@ -170,6 +170,7 @@ function loadPages() {
             currentPage = pageNum;
             loadProjects(currentPage);
             loadPages();
+            window.scrollTo({ top: 0, behavior: "smooth" });
         })
     });
 }
@@ -178,12 +179,14 @@ $('.after').click(function () {
     currentPage = currentPage + 1;
     loadProjects(currentPage);
     loadPages();
+    window.scrollTo({ top: 0, behavior: "smooth" });
 })
 
 $('.before').click(function () {
     currentPage = currentPage - 1;
     loadProjects(currentPage);
     loadPages();
+    window.scrollTo({ top: 0, behavior: "smooth" });
 })
 
 loadProjects(currentPage);
