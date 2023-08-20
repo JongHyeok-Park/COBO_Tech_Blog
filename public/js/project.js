@@ -67,9 +67,9 @@ function loadProjects(page) {
                 `
             <div class="project-item" data-id="${item.id}">
                 <div class="card m-auto">
-                    <img src="${item.imgUrl}"
-                        class="card-img-top"
-                        alt="로딩중">
+                    <div class="card-img-container">
+                        <img src="${item.imgUrl}" class="card-img-top" alt="로딩중">
+                    </div>
                     <div class="card-body">
                         <h5 class="card-title">${item.title}</h5>
                         <h6 class="card-subtitle mb-2 text-body-secondary row">
