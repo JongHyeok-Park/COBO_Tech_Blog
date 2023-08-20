@@ -43,11 +43,22 @@
 
 .card {
     overflow: hidden;
+    width: 18rem;
+}
+
+.card-img-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    overflow: hidden;
 }
 
 .card-img-top {
-    width: 18rem;
-    height: 18rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .card-text {
@@ -57,4 +68,51 @@
     text-overflow: ellipsis;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+}
+
+.user-name {
+    width: 60%;
+    text-align: center;
+}
+
+.created-date {
+    width: 40%;
+    text-align: center;
+}
+
+@media screen and (max-width: 991px) {
+    .silde-items-list {
+        width: 1800%;
+    }
+
+    .user-name {
+        width: auto;
+        text-align: left;
+    }
+
+    .created-date {
+        width: auto;
+        text-align: left;
+    }
+
+    .card {
+        width: 80%;
+    }
+
+    .control-prev span,
+    .control-next span {
+        font-size: 30px;
+    }
+
+    .slide-container button {
+        width: 30px;
+    }
+
+    .post-title {
+        display: -webkit-box;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+    }
 }

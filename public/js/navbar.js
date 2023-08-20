@@ -17,6 +17,13 @@ $(document).ready(function () {
             default:
                 break;
         }
+
+        // Toggle button
+        $('.navbar-toggler').click(function (e) {
+            $('#navbarNav').toggle('show');
+        })
     });
 })
+
+
 

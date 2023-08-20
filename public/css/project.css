@@ -5,11 +5,13 @@
 }
 
 .project-item {
-    width: 600px;
+    width: 50%;
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
 
 .card {
-    width: 540px;
+    width: 500px;
     overflow: hidden;
     box-shadow: 5px 5px 5px lightgrey;
     border: none;
@@ -33,16 +35,31 @@
     object-fit: cover;
 }
 
+.card-title {
+    display: -webkit-box;
+    height: 1.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
 .user-img-container {
     display: inline-block;
 }
 
 .user-list {
     display: -webkit-box;
+    height: 1.5rem;
     overflow: hidden;
     text-overflow: ellipsis;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
+}
+
+.created-at {
+    text-align: right;
+    float: right;
 }
 
 .user-img {
@@ -63,6 +80,11 @@
 
 .card-tag {
     height: 1.5rem;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
 }
 
 .page-seletor {
@@ -110,7 +132,15 @@
         width: 100%;
     }
 
+}
+
+@media screen and (max-width: 991px) {
     .card {
-        width: 540px;
+        width: 80%;
+    }
+
+    .created-at {
+        text-align: left;
+        float: none;
     }
 }

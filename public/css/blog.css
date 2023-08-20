@@ -55,6 +55,15 @@
     color: black;
 }
 
+.tag-container {
+    height: 1.5rem;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
 .tag-list-container {
     padding: 30px;
     height: 1rem;
@@ -120,4 +129,10 @@
 .tag-list .custom-active {
     color: black;
     scale: 1.1;
+}
+
+@media screen and (max-width: 991px) {
+    .tag-list-container {
+        display: none;
+    }
 }

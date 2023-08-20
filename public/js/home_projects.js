@@ -6,9 +6,10 @@ $.get(ServerURL + '/api/home/project').then((result) => {
         result.forEach(item => {
             let template = `
             <div class="slide-item">
-                <div class="card m-auto" style="width: 18rem;">
-                    <img src="${item.imgUrl}"
-                        class="card-img-top" alt="https://t3.ftcdn.net/jpg/02/15/15/46/360_F_215154625_hJg9QkfWH9Cu6LCTUc8TiuV6jQSI0C5X.jpg">
+                <div class="card m-auto">
+                    <div class="card-img-container">
+                        <img src="${item.imgUrl}" class="card-img-top" alt="Loading...">
+                    </div>
                     <div class="card-body">
                         <h5 class="card-title">${item.title}</h5>
                         <p class="card-text">${item.description}</p>

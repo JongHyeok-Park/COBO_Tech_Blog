@@ -10,7 +10,7 @@ nav {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 999;
+    z-index: 99;
     background-color: #fff;
 }
 
@@ -31,4 +31,19 @@ nav {
 
 .navbar-nav .active {
     font-weight: 700;
+}
+
+.navbar-toggler {
+    font-size: 30px;
+}
+
+.show {
+    display: block;
+    height: auto;
+}
+
+@media screen and (max-width: 991px) {
+    body {
+        padding-top: 71px;
+    }
 }

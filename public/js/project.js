@@ -65,7 +65,7 @@ function loadProjects(page) {
 
             let template =
                 `
-            <div class="project-item col-6 my-3" data-id="${item.id}">
+            <div class="project-item" data-id="${item.id}">
                 <div class="card m-auto">
                     <img src="${item.imgUrl}"
                         class="card-img-top"
@@ -73,8 +73,8 @@ function loadProjects(page) {
                     <div class="card-body">
                         <h5 class="card-title">${item.title}</h5>
                         <h6 class="card-subtitle mb-2 text-body-secondary row">
-                            <span class="col-8 user-list">${item.users}</span>
-                            <span class="col-4 float-end text-end">${item.createdAt}</span>
+                            <span class="col-lg-8 user-list">${item.users}</span>
+                            <span class="col-lg-4 created-at">${item.createdAt}</span>
                         </h6>
                         <p class="card-text">${item.description}</p>
                         <div class="card-tag">
