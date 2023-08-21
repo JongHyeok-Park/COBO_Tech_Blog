@@ -1,0 +1,52 @@
+div {
+    box-sizing: border-box;
+}
+
+.image-container {
+    width: 30%;
+    padding: 0 15px 15px 15px;
+    float: left;
+}
+
+.image {
+    width: 100%;
+    border: 1px solid #eee;
+}
+
+.image-container::after {
+    content: " ";
+    clear: both;
+    float: none;
+}
+
+.member-container .list-group .list-group-item img {
+    width: 130px;
+    height: 130px;
+    float: left;
+    border: 1px solid #aaa;
+    border-radius: 100%;
+    margin-right: 20px;
+    object-fit: cover;
+}
+
+.member-container .list-group .list-group-item img::after {
+    content: " ";
+    clear: both;
+    float: none;
+}
+
+.member-info {
+    display: flex;
+    height: 130px;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.member-name {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+h3 {
+    font-weight: 700;
+}
