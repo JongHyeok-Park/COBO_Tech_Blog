@@ -33,6 +33,7 @@ function toDate(date) {
 // 블로그 리스트 안에 태그
 function toTag(tags) {
     let tagTemplate = "";
+    let fontColor;
 
     tags.forEach(tag => {
         if (tag.isBlack) {

@@ -62,7 +62,7 @@ $.get(ServerURL + `/api/tech/post?techPostId=${postId}`).then((post) => {
     createdAt.html(toDate(post.createdAt));
     userImg.attr('src', `${post.user.imgUrl}`);
     postContent.append(post.detail);
-    tagContainer.append(toTag(post.skillTag))
+    tagContainer.append(toTag(post.skillTags))
 })
 
 $.get(ServerURL + '/api/tech/skillTags').then((tag) => {
