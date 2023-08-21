@@ -21,9 +21,9 @@ $.get(ServerURL + '/api/home/tech-post').then((result) => {
 
         let post_template = `
                 <li class="list-group-item">
-                <div class="row">
-                    <div class="col-lg-8 post-title">${post.title}</div>
-                    <div class="row col-lg-4 post-user">
+                <div class="row item-container">
+                    <div class="col-lg-9 post-title">${post.title}</div>
+                    <div class="row col-lg-3 post-user">
                         <div class="user-name">
                             <span>${post.user}</span>
                         </div>
@@ -37,18 +37,3 @@ $.get(ServerURL + '/api/home/tech-post').then((result) => {
         list_position.append(post_template);
     });
 })
-
-// template //
-{/* <li class="list-group-item">
-<div class="row">
-    <div class="col-8 post-title">TITLE</div>
-    <div class="row col-4">
-        <div class="text-center" style="width: 60%;">
-            <span class="user-name">USER</span>
-        </div>
-        <div class="text-center" style="width: 40%;">
-            <span class="created-date">DATE</span>
-        </div>
-    </div>
-</div>
-</li> */}

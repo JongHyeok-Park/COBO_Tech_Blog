@@ -21,27 +21,17 @@ $.get(ServerURL + '/api/home/project').then((result) => {
 
             $('.silde-items-list').append(template);
             item.skillTag.forEach((tag) => {
-                $('.card-tag').eq(count).append(`<span class="badge text-bg-secondary rounded-pill me-1" data-tag="${tag}">${tag}</span>`)
+                let fontColor;
+                if (tag.isBlack) {
+                    fontColor = 'black';
+                } else {
+                    fontColor = 'white';
+                }
+                $('.card-tag').eq(count).append(`<span class="badge rounded-pill me-1" style="color: ${fontColor}; background: ${tag.color};">${tag.name}</span>`)
             });
             count += 1;
         });
     }
 })
 
-// Template //
-// <div class="slide-item">
-//     <div class="card m-auto" style="width: 18rem;">
-//         <img src="https://t3.ftcdn.net/jpg/02/15/15/46/360_F_215154625_hJg9QkfWH9Cu6LCTUc8TiuV6jQSI0C5X.jpg"
-//             class="card-img-top" alt="...">
-//         <div class="card-body">
-//             <h5 class="card-title">기가 막힌 프로젝트1</h5>
-//             <div class="card-text-container"><p class="card-text">예전에 만들었던 기가 막힌 프로젝트임 아무튼 그럼.</p></div>
-//             <div class="card-tag">
-//                 <span class="badge text-bg-danger">HTML</span>
-//                 <span class="badge text-bg-primary">CSS3</span>
-//                 <span class="badge text-bg-warning">Javascript</span>
-//             </div>
-//         </div>
-//     </div>
-// </div>
 

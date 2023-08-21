@@ -59,6 +59,10 @@
     padding: 0px;
 }
 
+.tag-list-container {
+    padding: 30px;
+}
+
 @media screen and (max-width: 991px) {
     .tag-list-container {
         display: none;

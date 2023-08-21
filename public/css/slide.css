@@ -70,14 +70,36 @@
     -webkit-box-orient: vertical;
 }
 
+.item-container {
+    justify-content: center;
+}
+
+.post-title {
+    height: 1.5rem;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
 .user-name {
-    width: 60%;
+    width: 50%;
     text-align: center;
 }
 
 .created-date {
-    width: 40%;
-    text-align: center;
+    width: 50%;
+    text-align: right;
+}
+
+@media screen and (min-width: 992px) {
+
+    .row .post-title,
+    .row .post-user {
+        padding-left: 0;
+        padding-right: 0;
+    }
 }
 
 @media screen and (max-width: 991px) {
@@ -114,5 +136,9 @@
         text-overflow: ellipsis;
         -webkit-line-clamp: 1;
         -webkit-box-orient: vertical;
+    }
+
+    .item-container {
+        justify-content: left;
     }
 }

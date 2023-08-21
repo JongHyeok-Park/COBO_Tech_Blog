@@ -43,10 +43,15 @@ function toMemberList(members) {
 
 function toTagList(tags) {
     let tagTemplate = "";
+    let fontColor;
 
     tags.forEach(tag => {
-        tagTemplate = tagTemplate + `<span class="badge text-bg-secondary rounded-pill me-1"
-        data-tag="${tag}">${tag}</span>`;
+        if (tag.isBlack) {
+            fontColor = 'black';
+        } else {
+            fontColor = 'white';
+        }
+        tagTemplate = tagTemplate + `<span class="badge rounded-pill me-1" style="color: ${fontColor}; background: ${tag.color};">${tag.name}</span>`;
     });
 
     return tagTemplate;
@@ -191,27 +196,3 @@ $('.before').click(function () {
 
 loadProjects(currentPage);
 loadPages();
-
-
-// template //
-// <div class="project-item col-6 my-3">
-//     <div class="card m-auto">
-//         <img src="https://t3.ftcdn.net/jpg/02/15/15/46/360_F_215154625_hJg9QkfWH9Cu6LCTUc8TiuV6jQSI0C5X.jpg"
-//             class="card-img-top"
-//             alt="로딩중">
-//         <div class="card-body">
-//             <h5 class="card-title">기가 막힌 프로젝트</h5>
-//             <h6 class="card-subtitle mb-2 text-body-secondary row">
-//                 <span class="col-8">한승규, 박종혁, 홍세현, 김병찬, 김재민</span>
-//                 <span class="col-4 float-end text-end">2023-11-11</span>
-//             </h6>
-//             <p class="card-text">내용 들어가는 부분입니다.</p>
-//             <div class="card-tag">
-//                 <span class="badge text-bg-secondary rounded-pill me-1"
-//                     data-tag="SpringBoot">SpringBoot</span>
-//                 <span class="badge text-bg-secondary rounded-pill me-1" data-tag="HTML5">HTML5</span>
-//                 <span class="badge text-bg-secondary rounded-pill me-1" data-tag="CSS3">CSS3</span>
-//             </div>
-//         </div>
-//     </div>
-// </div>

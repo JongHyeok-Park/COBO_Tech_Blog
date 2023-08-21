@@ -28,8 +28,12 @@ function toTag(tags) {
     let tagTemplate = "";
 
     tags.forEach(tag => {
-        tagTemplate = tagTemplate + `<span class="badge text-bg-secondary rounded-pill me-1"
-        data-tag="${tag}">${tag}</span>`;
+        if (tag.isBlack) {
+            fontColor = 'black';
+        } else {
+            fontColor = 'white';
+        }
+        tagTemplate = tagTemplate + `<span class="badge rounded-pill me-1" style="color: ${fontColor}; background: ${tag.color};">${tag.name}</span>`;
     });
 
     return tagTemplate;
@@ -61,7 +65,7 @@ function loadPosts(page) {
         posts.forEach(item => {
 
             item.createdAt = toDate(item.createdAt);
-            item.skillTag = toTag(item.skillTag);
+            item.skillTags = toTag(item.skillTags);
 
             let template =
                 `
@@ -82,7 +86,7 @@ function loadPosts(page) {
                         </a>
                     </p>
                     <div class="tag-container">
-                        ${item.skillTag}
+                        ${item.skillTags}
                     </div>
                 </li>
                 `;
