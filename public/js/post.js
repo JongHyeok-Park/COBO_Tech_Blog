@@ -6,6 +6,7 @@ const userName = $('.user-name');
 const userDescription = $('.user-description');
 const createdAt = $('.created-date');
 const userImg = $('.user-image img');
+const tagContainer = $('.tag-container');
 const postURL = window.location;
 const postId = new URL(postURL).searchParams.get("id");
 
@@ -37,13 +38,31 @@ function toTagList(tags) {
     return tagTemplate;
 }
 
+function toTag(tags) {
+    let tagTemplate = "";
+    let fontColor;
+
+    tags.forEach(tag => {
+        if (tag.isBlack) {
+            fontColor = 'black';
+        } else {
+            fontColor = 'white';
+        }
+        tagTemplate = tagTemplate + `<span class="badge rounded-pill me-1" style="color: ${fontColor}; background: ${tag.color};">${tag.name}</span>`;
+    });
+
+    return tagTemplate;
+}
+
 $.get(ServerURL + `/api/tech/post?techPostId=${postId}`).then((post) => {
+    document.title = 'CoBo Developers - ' + post.title;
     postTitle.html(post.title);
     userName.html(post.user.name);
     userDescription.html(post.user.description);
     createdAt.html(toDate(post.createdAt));
     userImg.attr('src', `${post.user.imgUrl}`);
     postContent.append(post.detail);
+    tagContainer.append(toTag(post.skillTag))
 })
 
 $.get(ServerURL + '/api/tech/skillTags').then((tag) => {
@@ -53,6 +72,6 @@ $.get(ServerURL + '/api/tech/skillTags').then((tag) => {
 
     $('.tag-list .skill-tag').click(function (e) {
         let tagId = e.target.dataset.tagId;
-        window.location.assign('/post/skillTagId?=' + tagId);
+        window.location.assign('/tech.html?skillTagId=' + tagId);
     })
 })

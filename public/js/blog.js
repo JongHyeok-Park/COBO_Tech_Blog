@@ -2,12 +2,19 @@ const listContainer = $('.item-list');
 const pageSelector = $('.selector-number');
 const tagListContainer = $('.tag-list');
 const pageSize = 10;
+const postURL = window.location;
+const paramId = new URL(postURL).searchParams.get("skillTagId");
 let currentPage = 1;
 let currentTag = 0;
 let postNum;
 let totalPages;
 let startPage;
 let endPage;
+
+if (!!paramId) {
+    console.log(paramId);
+    currentTag = paramId;
+}
 
 // 날짜 포매팅
 function toDate(date) {

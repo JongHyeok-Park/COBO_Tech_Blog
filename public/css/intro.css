@@ -8,6 +8,10 @@ div {
     float: left;
 }
 
+.intro {
+    text-align: justify;
+}
+
 .image {
     width: 100%;
     border: 1px solid #eee;
@@ -49,4 +53,12 @@ div {
 
 h3 {
     font-weight: 700;
+}
+
+@media screen and (max-width: 991px) {
+    .image-container {
+        width: 100%;
+        padding: 0 15px 15px 15px;
+        float: none;
+    }
 }
