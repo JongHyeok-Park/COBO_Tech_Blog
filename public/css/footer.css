@@ -11,13 +11,11 @@ footer {
     position: relative;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     height: 50px;
 }
 
 .footer-right {
-    position: absolute;
-    right: 0%;
-    padding-right: 12px;
     display: flex;
     height: 100%;
     align-items: center;
@@ -39,4 +37,14 @@ footer {
 
 .footer-icons li a {
     color: black;
+}
+
+@media screen and (max-width: 991px) {
+    .hit-today {
+        display: none;
+    }
+
+    .hit-total {
+        display: none;
+    }
 }
