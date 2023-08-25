@@ -1,4 +1,4 @@
-const member_list = $('.list-group');
+const member_list = $('.member-group');
 
 $.get(ServerURL + '/api/about/members').then((result) => {
     let template;
@@ -6,15 +6,29 @@ $.get(ServerURL + '/api/about/members').then((result) => {
     result.forEach(member => {
 
         template = `
-        <li class="list-group-item">
-            <img src="${member.imgUrl}" alt="" width="100px">
-                <div class="member-info">
-                    <span class="member-name">${member.name}</span>
-                    <span class="member-description">${member.description}</span>
-                    <span class="member-email">email: ${member.email}</span>
-                    <span class="member-github">github: <a href="${member.github}">${member.github}</a></span>
+        <div class="member-card">
+                    <div class="member-img-container">
+                        <div class="member-img-inner">
+                            <img class="member-img" src="${member.imgUrl}" alt="">
+                        </div>
+                    </div>
+                    <div class="member-info">
+                        <h4 class="member-name">${member.name}</h4>
+                        <p class="member-description">${member.description}</p>
+                        <div class="member-link">
+                            <span class="member-email">
+                                <a href="mailto: ${member.email}">
+                                    <i class="fa-regular fa-envelope fa-2x"></i>
+                                </a>
+                            </span>
+                            <span class="member-github">
+                                <a href="${member.github}" target="_blank">
+                                    <i class="fa-brands fa-github fa-2x"></i>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
                 </div>
-        </li>
         `;
 
         member_list.append(template);
