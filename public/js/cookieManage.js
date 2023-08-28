@@ -18,3 +18,27 @@ function getCookie(name) {
     }
     return null;
 }
+
+function deleteCookie(name) {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.startsWith(name + '=')) {
+            setCookie(name, cookie.substring(name.length + 1), 0);
+        }
+    }
+}
+
+let loginCheck = new Promise((resolve, reject) => {
+    $.ajax({
+        url: ServerURL + '/api/all/check',
+        type: 'GET',
+        headers: {
+            "Authorization": 'Bearer ' + getCookie('AccessToken')
+        }
+    }).then((res) => {
+        resolve();
+    }).catch((err) => {
+        reject();
+    })
+})

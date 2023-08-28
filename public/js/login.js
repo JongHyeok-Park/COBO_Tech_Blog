@@ -6,6 +6,7 @@ if (!!loginCode) {
     $.get(ServerURL + `/api/all/login?code=${loginCode}`).then((res) => {
         setCookie('AccessToken', res.accessToken, accessTime);
         setCookie('RefreshToken', res.refreshToken, refreshTime);
+        setCookie('UserID', res.userId, accessTime);
         window.location.href = '/';
     }).catch(() => {
         window.location.href = '/login_fail.html';

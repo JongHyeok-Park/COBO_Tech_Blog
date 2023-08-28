@@ -44,27 +44,27 @@ $(document).ready(function () {
                     }).then((res) => {
                         setCookie('AccessToken', res.accessToken, accessTime);
                         setCookie('RefreshToken', res.refreshToken, refreshTime);
+                        setCookie('UserID', res.userId, accessTime);
                         window.location.href = '/';
                     }).catch(() => {
                         window.location.href = '/login_fail.html';
                     })
                 }
             } else {
-                window.location.assign = '/';
+                window.location.href = '/';
             }
         })
 
         $('#logout').click(function (e) {
+            console.log('logout');
             deleteCookie('AccessToken');
-            window.location.assign = '/';
+            deleteCookie('UserID');
+            window.location.href = '/';
         })
 
-        if (!!getCookie('AccessToken')) {
+        loginCheck.then(() => {
             $('#login').css('display', 'none');
             $('#logout').css('display', 'inline-block');
-        }
+        })
     });
 })
-
-
-

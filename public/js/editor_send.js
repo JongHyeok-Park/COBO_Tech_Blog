@@ -17,39 +17,39 @@ $('#submit').click(function () {
         fieldList.push(parseInt(contentImages[i].dataset.id))
     }
 
-    console.log(`제목 : ${title}`);
-    console.log(`content : ${content}`);
-    console.log(`detail : ${detail}`);
-    console.log(fieldList);
-    console.log(checkedTags);
-    console.log(JSON.stringify({
-        "content": content,
-        "detail": detail,
-        "fileIdList": fieldList,
-        "skillTagIdList": checkedTags,
-        "title": title,
-        "userId": userId
-    }))
+    // console.log(`제목 : ${title}`);
+    // console.log(`content : ${content}`);
+    // console.log(`detail : ${detail}`);
+    // console.log(fieldList);
+    // console.log(checkedTags);
+    // console.log(JSON.stringify({
+    //     "content": content,
+    //     "detail": detail,
+    //     "fileIdList": fieldList,
+    //     "skillTagIdList": checkedTags,
+    //     "title": title,
+    //     "userId": userId
+    // }))
 
-    // $.ajax({
-    //     type: 'POST',
-    //     url: ServerURL + '/api/tech/post',
-    //     data: JSON.stringify({
-    //         "content": content,
-    //         "detail": detail,
-    //         "fileIdList": fieldList,
-    //         "skillTagIdList": checkedTags,
-    //         "title": title,
-    //         "userId": userId
-    //     }),
-    //     contentType: 'application/json; charset=utf-8'
-    // }).then((res) => {
-    //     alert('작성 완료.');
-    //     window.location.assign('/');
-    // }).catch((err) => {
-    //     alert('작성 실패');
-    //     console.log(err);
-    // })
+    $.ajax({
+        type: 'POST',
+        url: ServerURL + '/api/tech/post',
+        data: JSON.stringify({
+            "content": content,
+            "detail": detail,
+            "fileIdList": fieldList,
+            "skillTagIdList": checkedTags,
+            "title": title,
+            "userId": userId
+        }),
+        contentType: 'application/json; charset=utf-8'
+    }).then((res) => {
+        alert('작성 완료.');
+        window.location.assign('/');
+    }).catch((err) => {
+        alert('작성 실패');
+        console.log(err);
+    })
 })
 
 $.get(ServerURL + '/api/tech/skillTags').then((tags) => {
@@ -80,9 +80,4 @@ $.get(ServerURL + '/api/tech/skillTags').then((tags) => {
         checkedTags.sort();
         console.log('skillTag : ' + checkedTags);
     })
-})
-
-$('.user-input').change(function (e) {
-    userId = parseInt(e.target.dataset.id);
-    console.log('user : ' + userId);
 })

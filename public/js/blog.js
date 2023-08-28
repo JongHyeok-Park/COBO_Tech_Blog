@@ -203,6 +203,14 @@ $.get(ServerURL + '/api/tech/skillTags').then((tag) => {
     })
 })
 
+loginCheck.then(() => {
+    $('#post').css('display', 'inline-block');
+
+    $('#post').click(function () {
+        window.location.href = '/edit.html'
+    })
+})
+
 loadPosts(currentPage);
 loadPages();
 

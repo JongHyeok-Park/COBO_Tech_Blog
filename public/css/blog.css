@@ -134,6 +134,10 @@
     scale: 1.1;
 }
 
+#post {
+    display: none;
+}
+
 @media screen and (max-width: 991px) {
     .tag-list-container {
         display: none;
