@@ -1,18 +1,62 @@
 const skillTag = $('.skilltag-container');
 let checkedTags = [];
+let userId;
 
 $('#submit').click(function () {
-    let content = editorContent.innerHTML.replace(/(<([^>]+)>)/gi, "");
-    let title = $('.form-control').val();
+    if (userId == null) {
+        alert('업로드 유저를 고르세요.');
+    }
 
-    console.log(`제목 : ${title}, content : ${content}`);
+    let content = editorContent.innerHTML.replace(/(<([^>]+)>)/gi, " ").replace(/&nbsp;/gi, "").substring(0, 400);
+    let title = $('.form-control').val();
+    let detail = editorContent.innerHTML;
+    let fieldList = [];
+    let contentImages = editorContent.getElementsByTagName('img');
+
+    for (let i = 0; i < contentImages.length; i++) {
+        fieldList.push(parseInt(contentImages[i].dataset.id))
+    }
+
+    console.log(`제목 : ${title}`);
+    console.log(`content : ${content}`);
+    console.log(`detail : ${detail}`);
+    console.log(fieldList);
+    console.log(checkedTags);
+    console.log(JSON.stringify({
+        "content": content,
+        "detail": detail,
+        "fileIdList": fieldList,
+        "skillTagIdList": checkedTags,
+        "title": title,
+        "userId": userId
+    }))
+
+    // $.ajax({
+    //     type: 'POST',
+    //     url: ServerURL + '/api/tech/post',
+    //     data: JSON.stringify({
+    //         "content": content,
+    //         "detail": detail,
+    //         "fileIdList": fieldList,
+    //         "skillTagIdList": checkedTags,
+    //         "title": title,
+    //         "userId": userId
+    //     }),
+    //     contentType: 'application/json; charset=utf-8'
+    // }).then((res) => {
+    //     alert('작성 완료.');
+    //     window.location.assign('/');
+    // }).catch((err) => {
+    //     alert('작성 실패');
+    //     console.log(err);
+    // })
 })
 
 $.get(ServerURL + '/api/tech/skillTags').then((tags) => {
     tags.forEach(element => {
         let newTag = `
         <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="TagCheck" data-id="${element.id}">
+            <input class="form-check-input skill-tag-input" type="checkbox" value="${element.id}">
             <label class="form-check-label" for="TagCheck">
                 ${element.name}
             </label>
@@ -22,18 +66,23 @@ $.get(ServerURL + '/api/tech/skillTags').then((tags) => {
         skillTag.append(newTag);
     });
 
-    $('.form-check-input').change(function (e) {
+    $('.skill-tag-input').change(function (e) {
         if (e.target.checked) {
-            checkedTags.push(e.target.dataset.id);
+            checkedTags.push(parseInt(e.target.value));
         } else {
             checkedTags.forEach((a) => {
-                if (a == e.target.dataset.id) {
-                    checkedTags = checkedTags.filter((tag) => tag !== e.target.dataset.id);
+                if (a == parseInt(e.target.value)) {
+                    checkedTags = checkedTags.filter((tag) => tag != parseInt(e.target.value));
                 }
             })
         }
 
         checkedTags.sort();
-        console.log(checkedTags);
+        console.log('skillTag : ' + checkedTags);
     })
+})
+
+$('.user-input').change(function (e) {
+    userId = parseInt(e.target.dataset.id);
+    console.log('user : ' + userId);
 })

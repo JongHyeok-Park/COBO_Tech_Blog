@@ -189,31 +189,32 @@ btnImage.addEventListener('click', function () {
 
 imageSelector.addEventListener('change', function (e) {
     const files = e.target.files;
-    const formData = new FormData();
+    const multipartFile = new FormData();
     if (!!files) {
-        console.log(files[0]);
-        formData.append(files[0].name, files[0]);
+        console.log(files[0].name, files[0]);
+        multipartFile.append('multipartFile', files[0]);
         $.ajax({
             type: 'POST',
             url: ServerURL + '/api/tech/img',
-            data: formData,
+            data: multipartFile,
             contentType: false,
             processData: false
         }).then((res) => {
-            console.log('전송 완료');
-            insertImageDate(res.url);
+            console.log('이미지 전송 완료');
+            console.log(res);
+            insertImageData(res);
         }).catch((err) => {
-            console.log("실패함");
-            console.log(err)
+            alert('이미지 전송 실패');
+            console.log("이미지 전송 실패");
+            console.log(err);
         })
     }
 })
 
-function insertImageDate(file) {
-    const reader = new FileReader();
-    reader.addEventListener('load', function (e) {
-        setFocus();
-        document.execCommand('insertImage', false, `${reader.result}`);
-    });
-    reader.readAsDataURL(file);
+function insertImageData(file) {
+    const image = `
+        <img src="https://cobo-blog.s3.ap-northeast-2.amazonaws.com/${file[0].url}" data-id="${file[0].id}">
+    `;
+    document.execCommand('insertHTML', false, image);
+    setFocus();
 }

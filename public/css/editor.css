@@ -56,3 +56,7 @@ blockquote {
     margin: 16px 0;
     padding: 15px;
 }
+
+.right-content {
+    padding: 30px;
+}
