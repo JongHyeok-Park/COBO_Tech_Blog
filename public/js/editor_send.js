@@ -71,7 +71,7 @@ $('#submit').click(function () {
         } else if (method == 'PATCH') {
             console.log('수정');
             let deleteFileList = [];
-            deleteFileList = initialFileList.concat(fileList).filter(item => !initialFileList.includes(item) || !fileList.includes(item));
+            deleteFileList = initialFileList.filter(item => !initialFileList.includes(item) || !fileList.includes(item));
 
             $.ajax({
                 type: 'PATCH',
