@@ -30,15 +30,17 @@ function deleteCookie(name) {
 }
 
 let loginCheck = new Promise((resolve, reject) => {
-    $.ajax({
-        url: ServerURL + '/api/all/check',
-        type: 'GET',
-        headers: {
-            "Authorization": 'Bearer ' + getCookie('AccessToken')
-        }
-    }).then((res) => {
-        resolve();
-    }).catch((err) => {
-        reject();
-    })
+    if (!!getCookie('AccessToken')) {
+        $.ajax({
+            url: ServerURL + '/api/all/check',
+            type: 'GET',
+            headers: {
+                "Authorization": 'Bearer ' + getCookie('AccessToken')
+            }
+        }).then((res) => {
+            resolve();
+        }).catch((err) => {
+            reject();
+        })
+    }
 })
