@@ -199,7 +199,10 @@ imageSelector.addEventListener('change', function (e) {
             url: ServerURL + '/api/tech/img',
             data: multipartFile,
             contentType: false,
-            processData: false
+            processData: false,
+            headers: {
+                "Authorization": 'Bearer ' + getCookie('AccessToken')
+            }
         }).then((res) => {
             console.log('이미지 전송 완료');
             console.log(res);
