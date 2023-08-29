@@ -60,7 +60,7 @@ function toTagList(tags) {
 function loadProjects(page) {
     currentPage = page;
 
-    $.get(ServerURL + `/api/project/project-cards?page=${page}&size=${pageSize}`).then((projects) => {
+    $.get(ServerURL + `/api/project/projects?page=${page}&size=${pageSize}`).then((projects) => {
         container.html("");
         projects.forEach(item => {
 
@@ -94,9 +94,15 @@ function loadProjects(page) {
         });
 
         $('.project-item').click(function (e) {
+            modalTitle.html('');
+            modalDate.html('');
+            modalContent.html(`<div class="h-100 d-flex justify-content-center align-items-center"><div class="spinner-border text-center" role="status">
+            <span class="visually-hidden">Loading...</span>
+            </div></div>`);
             $.get(ServerURL + `/api/project/project?projectId=${this.dataset.id}`).then((item) => {
                 modalTitle.html(item.title);
                 modalDate.html(toDate(item.created_at));
+                modalContent.html('');
                 modalContent.attr('src', item.url);
             })
             modal.css('transition', 'all 0.5s');

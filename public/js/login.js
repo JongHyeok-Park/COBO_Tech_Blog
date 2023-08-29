@@ -12,5 +12,6 @@ if (!!loginCode) {
         window.location.href = '/login_fail.html';
     })
 } else {
-    window.location.href = '/login_fail.html';
+    alert('잘못된 접근입니다.');
+    window.location.href = '/';
 }

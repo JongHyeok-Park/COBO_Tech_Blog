@@ -16,6 +16,10 @@
     scale: 1.1;
 }
 
+.post-content {
+    min-height: 400px;
+}
+
 .user-image {
     width: 3rem;
     float: left;
@@ -61,6 +65,11 @@
 
 .tag-list-container {
     padding: 30px;
+}
+
+#delete,
+#update {
+    display: none;
 }
 
 @media screen and (max-width: 991px) {

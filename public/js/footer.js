@@ -17,7 +17,7 @@ $(document).ready(function () {
             $('.hit-today').html("오늘 방문자 수 : " + res.today)
             $('.hit-total').html("누적 방문자 수 : " + res.total)
         }).catch((err) => {
-            console.log(err);
+
         });
     });
 });

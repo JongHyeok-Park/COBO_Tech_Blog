@@ -22,7 +22,7 @@ $.get(ServerURL + '/api/home/tech-post').then((result) => {
         let post_template = `
                 <li class="list-group-item">
                 <div class="row item-container">
-                    <div class="col-lg-9 post-title">${post.title}</div>
+                    <div class="col-lg-9 post-title"><a href="/post.html?id=${post.techPostId}">${post.title}</a></div>
                     <div class="row col-lg-3 post-user">
                         <div class="user-name">
                             <span>${post.user}</span>

@@ -1,7 +1,7 @@
-// id = "custom-navbar" 에 load
 const accessTime = 2 * 60;
 const refreshTime = 24 * 60 * 7;
 
+// id = "custom-navbar" 에 load
 $(document).ready(function () {
     $("#custom-navbar").load("../../pages/includes/navbar.html", function () {
         let path = window.location.pathname;
@@ -26,40 +26,37 @@ $(document).ready(function () {
             $('#navbarNav').toggle('show');
         })
 
-        $('#login').click(function (e) {
-            if (getCookie('AccessToken') === null) {
-                if (getCookie('RefreshToken') === null) {
-                    window.location.href = 'https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=a5db3264dd140555c88490019e16b3d5&redirect_uri=https://team-cobo.site/login.html';
-                } else {
-                    $.ajax({
-                        url: ServerURL + "api/all/login",
-                        type: 'PATCH',
-                        contentType: "application/json; charset=UTF-8",
-                        data: JSON.stringify({
-                            "refreshToken": `${getCookie('RefreshToken')}`
-                        }),
-                        headers: {
-                            "Authorization": 'Bearer ' + getCookie('RefreshToken')
-                        }
-                    }).then((res) => {
-                        setCookie('AccessToken', res.accessToken, accessTime);
-                        setCookie('RefreshToken', res.refreshToken, refreshTime);
-                        setCookie('UserID', res.userId, accessTime);
-                        window.location.href = '/';
-                    }).catch(() => {
-                        window.location.href = '/login_fail.html';
-                    })
-                }
-            } else {
-                window.location.href = '/';
+        if (!getCookie('AccessToken')) {
+            if (!!getCookie('RefreshToken')) {
+                $.ajax({
+                    url: ServerURL + "/api/all/login",
+                    type: 'PATCH',
+                    contentType: "application/json; charset=UTF-8",
+                    data: JSON.stringify({
+                        "refreshToken": `${getCookie('RefreshToken')}`
+                    }),
+                    headers: {
+                        "Authorization": 'Bearer ' + getCookie('RefreshToken')
+                    }
+                }).then((res) => {
+                    setCookie('AccessToken', res.accessToken, accessTime);
+                    setCookie('RefreshToken', res.refreshToken, refreshTime);
+                    setCookie('UserID', res.userId, accessTime);
+                    window.location.reload();
+                })
             }
+        }
+
+        $('#login').click(function (e) {
+            window.location.href = 'https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=a5db3264dd140555c88490019e16b3d5&redirect_uri=https://team-cobo.site/login.html';
         })
 
         $('#logout').click(function (e) {
             console.log('logout');
             deleteCookie('AccessToken');
+            deleteCookie('RefreshToken');
             deleteCookie('UserID');
-            window.location.href = '/';
+            window.location.reload();
         })
 
         loginCheck.then(() => {

@@ -159,6 +159,7 @@ btnFull.addEventListener('click', function () {
 // Block Quote Insert
 btnQuote.addEventListener('click', function () {
     document.execCommand('formatBlock', false, 'blockquote');
+    setFocus();
 })
 
 // List Insert

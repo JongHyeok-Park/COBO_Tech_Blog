@@ -9,6 +9,7 @@ const userImg = $('.user-image img');
 const tagContainer = $('.tag-container');
 const postURL = window.location;
 const postId = new URL(postURL).searchParams.get("id");
+let userId;
 
 console.log(postId);
 
@@ -63,6 +64,31 @@ $.get(ServerURL + `/api/tech/post?techPostId=${postId}`).then((post) => {
     userImg.attr('src', `${post.user.imgUrl}`);
     postContent.append(post.detail);
     tagContainer.append(toTag(post.skillTags))
+    userId = post.user.userId;
+
+    loginCheck.then(() => {
+        if (getCookie('UserID') == userId) {
+            $('#delete').css('display', 'inline-block');
+            $('#update').css('display', 'inline-block');
+
+            $('#delete').click(function () {
+                $.ajax({
+                    type: 'DELETE',
+                    url: ServerURL + `/api/tech/post?techPostId=${postId}`,
+                    headers: {
+                        "Authorization": 'Bearer ' + getCookie('AccessToken')
+                    }
+                }).then(() => {
+                    alert('삭제 완료.');
+                    window.location.href = '/tech.html';
+                })
+            })
+
+            $('#update').click(function () {
+                window.location.href = '/edit.html?id=' + postId;
+            })
+        }
+    })
 })
 
 $.get(ServerURL + '/api/tech/skillTags').then((tag) => {

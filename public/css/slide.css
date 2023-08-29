@@ -44,6 +44,7 @@
 .card {
     overflow: hidden;
     width: 18rem;
+    cursor: pointer;
 }
 
 .card-img-container {
@@ -93,14 +94,24 @@
     -webkit-box-orient: vertical;
 }
 
+.post-title a {
+    text-decoration: none;
+    color: black;
+}
+
 .user-name {
-    width: 50%;
+    width: 40%;
     text-align: center;
 }
 
 .created-date {
-    width: 50%;
+    width: 60%;
     text-align: right;
+}
+
+#more-post {
+    text-decoration: none;
+    color: black;
 }
 
 @media screen and (min-width: 992px) {
