@@ -4,18 +4,64 @@ let method = 'POST';
 let initialFileList = [];
 let checkedTags = [];
 
-if (!!postId) {
-    $.get(ServerURL + `/api/tech/post?techPostId=${postId}`).then((res) => {
-        $('.content').html(res.detail);
-        $('#floatingTextarea').val(res.title);
-        $('#submit').html('수정하기');
-        method = 'PATCH'
-        let contentImages = editorContent.getElementsByTagName('img');
-        for (let i = 0; i < contentImages.length; i++) {
-            initialFileList.push(parseInt(contentImages[i].dataset.id))
-        }
-    })
+if (!getCookie('AccessToken')) {
+    alert('로그인 후 이용해주세요.');
+    window.location.href = '/';
 }
+
+$.get(ServerURL + '/api/tech/skillTags').then((tags) => {
+    tags.forEach(element => {
+        let newTag = `
+        <div class="form-check">
+            <input class="form-check-input skill-tag-input" type="checkbox" value="${element.id}">
+            <label class="form-check-label" for="TagCheck">${element.name}</label>
+        </div>
+        `;
+
+        skillTag.append(newTag);
+    });
+
+    $('.skill-tag-input').change(function (e) {
+        if (e.target.checked) {
+            checkedTags.push(parseInt(e.target.value));
+        } else {
+            checkedTags.forEach((a) => {
+                if (a == parseInt(e.target.value)) {
+                    checkedTags = checkedTags.filter((tag) => tag != parseInt(e.target.value));
+                }
+            })
+        }
+
+        checkedTags.sort();
+        console.log('skillTag : ' + checkedTags);
+    })
+
+    if (!!postId) {
+        $.get(ServerURL + `/api/tech/post?techPostId=${postId}`).then((res) => {
+            if (res.user.userId != getCookie('UserID')) {
+                alert('수정 권한이 없습니다.');
+                window.location.href = '/';
+            }
+
+            $('.content').html(res.detail);
+            $('#floatingTextarea').val(res.title);
+            $('#submit').html('수정하기');
+            res.skillTags.forEach(tag => {
+                for (let i = 0; i < $('.skill-tag-input').length; i++) {
+                    if (tag.name == $('.form-check-label').eq(i).html()) {
+                        $('.skill-tag-input').eq(i).prop('checked', true);
+                        checkedTags.push($('.skill-tag-input').eq(i).val())
+                    }
+                }
+            });
+            method = 'PATCH'
+            let contentImages = editorContent.getElementsByTagName('img');
+            for (let i = 0; i < contentImages.length; i++) {
+                initialFileList.push(parseInt(contentImages[i].dataset.id))
+            }
+        })
+    }
+})
 
 $('#submit').click(function () {
     let content = editorContent.innerHTML.replace(/(<([^>]+)>)/gi, " ").replace(/&nbsp;/gi, "").substring(0, 400);
@@ -103,32 +149,3 @@ $('#submit').click(function () {
     })
 })
 
-$.get(ServerURL + '/api/tech/skillTags').then((tags) => {
-    tags.forEach(element => {
-        let newTag = `
-        <div class="form-check">
-            <input class="form-check-input skill-tag-input" type="checkbox" value="${element.id}">
-            <label class="form-check-label" for="TagCheck">
-                ${element.name}
-            </label>
-        </div>
-        `;
-
-        skillTag.append(newTag);
-    });
-
-    $('.skill-tag-input').change(function (e) {
-        if (e.target.checked) {
-            checkedTags.push(parseInt(e.target.value));
-        } else {
-            checkedTags.forEach((a) => {
-                if (a == parseInt(e.target.value)) {
-                    checkedTags = checkedTags.filter((tag) => tag != parseInt(e.target.value));
-                }
-            })
-        }
-
-        checkedTags.sort();
-        console.log('skillTag : ' + checkedTags);
-    })
-})
