@@ -63,13 +63,14 @@ $(document).ready(function () {
             window.location.reload();
         })
 
-        loginCheck.then(() => {
+        loginCheck.then((res) => {
             $('#login').css('display', 'none');
             $('.current-user').css('display', 'inline-block');
-            $.get(ServerURL + '/api/all/user?userId=' + getCookie('UserID')).then((res) => {
-                $('#current-user-img').attr('src', res.imgUrl);
-                $('#current-user-name').html(res.name);
-            })
+            $('#current-user-img').attr('src', res.imgUrl);
+            $('#current-user-name').html(res.name);
+        }).catch(() => {
+            $('#login').css('display', 'inline-block');
+            $('.current-user').css('display', 'none');
         })
     });
 })

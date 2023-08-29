@@ -43,6 +43,7 @@ nav {
 }
 
 #login {
+    display: none;
     cursor: pointer;
 }
 

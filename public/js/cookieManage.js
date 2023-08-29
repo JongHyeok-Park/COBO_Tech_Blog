@@ -38,9 +38,11 @@ let loginCheck = new Promise((resolve, reject) => {
                 "Authorization": 'Bearer ' + getCookie('AccessToken')
             }
         }).then((res) => {
-            resolve();
+            resolve(res);
         }).catch((err) => {
             reject();
         })
+    } else {
+        reject();
     }
 })
