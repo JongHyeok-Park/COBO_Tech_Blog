@@ -18,6 +18,7 @@ function toDate(date) {
     let yyyy = date.substring(0, 4);
     let mm = date.substring(4, 6);
     let dd = date.substring(6, 8);
+    mm = Number(mm) - 1;
 
     let stringNewDate = new Date(yyyy, mm, dd);
     stringNewDate.setDate(stringNewDate.getDate());

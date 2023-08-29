@@ -26,6 +26,10 @@ $(document).ready(function () {
             $('#navbarNav').toggle('show');
         })
 
+        $('.dropdown-toggle').click(function (e) {
+            $('.dropdown-menu').toggle('show');
+        })
+
         if (!getCookie('AccessToken')) {
             if (!!getCookie('RefreshToken')) {
                 $.ajax({
@@ -61,7 +65,11 @@ $(document).ready(function () {
 
         loginCheck.then(() => {
             $('#login').css('display', 'none');
-            $('#logout').css('display', 'inline-block');
+            $('.current-user').css('display', 'inline-block');
+            $.get(ServerURL + '/api/all/user?userId=' + getCookie('UserID')).then((res) => {
+                $('#current-user-img').attr('src', res.imgUrl);
+                $('#current-user-name').html(res.name);
+            })
         })
     });
 })

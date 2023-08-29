@@ -20,7 +20,17 @@
             </ul>
             <div class="d-flex login-container">
                 <span id="login"><img src="../../public/image/kakao_login_medium_narrow.png" alt=""></span>
-                <span id="logout">로그아웃</span>
+                <div class="dropdown current-user">
+                    <span class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img id="current-user-img" src="" alt="">
+                        <span id="current-user-name"></span>
+                    </span>
+                    <ul class="dropdown-menu">
+                        <li><span id="logout">로그아웃</span></li>
+                    </ul>
+                </div>
+
+
             </div>
         </div>
     </div>
