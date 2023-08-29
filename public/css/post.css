@@ -58,6 +58,14 @@
     white-space: normal;
 }
 
+.post-content img {
+    max-width: 500px;
+    max-height: 500px;
+    padding: 10px;
+    margin: auto;
+    display: block;
+}
+
 .post-content div div {
     border-radius: 0px;
     padding: 0px;
