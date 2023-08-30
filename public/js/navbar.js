@@ -56,11 +56,19 @@ $(document).ready(function () {
         })
 
         $('#logout').click(function (e) {
-            console.log('logout');
-            deleteCookie('AccessToken');
-            deleteCookie('RefreshToken');
-            deleteCookie('UserID');
-            window.location.reload();
+            $.ajax({
+                url: ServerURL + '/api/all/login',
+                type: 'DELETE',
+                contentType: "application/json; charset=UTF-8",
+                data: JSON.stringify({
+                    "refreshToken": `${getCookie('RefreshToken')}`
+                })
+            }).then(() => {
+                deleteCookie('AccessToken');
+                deleteCookie('RefreshToken');
+                deleteCookie('UserID');
+                window.location.reload();
+            })
         })
 
         loginCheck.then((res) => {
