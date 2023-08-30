@@ -18,7 +18,6 @@
 }
 
 .slide-item {
-    width: 5.55%;
     float: left;
 }
 
@@ -112,6 +111,18 @@
 #more-post {
     text-decoration: none;
     color: black;
+}
+
+.list-group div {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.list-group div span {
+    color: grey;
 }
 
 @media screen and (min-width: 992px) {

@@ -4,7 +4,6 @@ const modalContent = $('.project-modal-content');
 const left_button = $('.control-prev');
 const right_button = $('.control-next');
 const slide = $('.silde-items-list');
-const slideItem = $('.slide-item')
 let autoSlide;
 let projectNum;
 let now_position;
@@ -83,7 +82,37 @@ $.get(ServerURL + '/api/home/project').then((result) => {
         slide.css('width', '100%');
         slide.css('display', 'flex');
         slide.css('justify-content', 'center');
-        slideItem.css('width', '33.333334%');
+
+        result.forEach(item => {
+            let template = `
+            <div class="slide-item">
+                <div class="card m-auto" data-id="${item.projectId}">
+                    <div class="card-img-container">
+                        <img src="${item.imgUrl}" class="card-img-top" alt="Loading...">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">${item.title}</h5>
+                        <p class="card-text">${item.description}</p>
+                        <div class="card-tag"></div>
+                    </div>
+                </div>
+            </div>
+            `;
+
+            $('.silde-items-list').append(template);
+            item.skillTag.forEach((tag) => {
+                let fontColor;
+                if (tag.isBlack) {
+                    fontColor = 'black';
+                } else {
+                    fontColor = 'white';
+                }
+                $('.card-tag').eq(count).append(`<span class="badge rounded-pill me-1" style="color: ${fontColor}; background: ${tag.color};">${tag.name}</span>`)
+            });
+            count += 1;
+        });
+
+        $('.slide-item').css('width', '33.333334%');
     }
 
     $('.card').click(function (e) {

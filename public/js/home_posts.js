@@ -16,24 +16,28 @@ function StringToDate(date, n) {
 }
 
 $.get(ServerURL + '/api/home/tech-post').then((result) => {
-    result.forEach(post => {
-        post.date = StringToDate(post.date, 0);
+    if (result.length > 0) {
+        list_position.html('');
 
-        let post_template = `
-                <li class="list-group-item">
-                <div class="row item-container">
-                    <div class="col-lg-9 post-title"><a href="/post.html?id=${post.techPostId}">${post.title}</a></div>
-                    <div class="row col-lg-3 post-user">
-                        <div class="user-name">
-                            <span>${post.user}</span>
-                        </div>
-                        <div class="created-date">
-                            <span>${post.date}</span>
+        result.forEach(post => {
+            post.date = StringToDate(post.date, 0);
+
+            let post_template = `
+                    <li class="list-group-item">
+                    <div class="row item-container">
+                        <div class="col-lg-9 post-title"><a href="/post.html?id=${post.techPostId}">${post.title}</a></div>
+                        <div class="row col-lg-3 post-user">
+                            <div class="user-name">
+                                <span>${post.user}</span>
+                            </div>
+                            <div class="created-date">
+                                <span>${post.date}</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                </li>`;
+                    </li>`;
 
-        list_position.append(post_template);
-    });
+            list_position.append(post_template);
+        });
+    }
 })
