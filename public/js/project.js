@@ -2,7 +2,7 @@ const container = $('.projects-container');
 const pageSelector = $('.selector-number');
 const modalTitle = $('.modal-title');
 const modalDate = $('.modal-date');
-const modalContent = $('md-block');
+const modalContent = $('.project-modal-content');
 const pageSize = 8;
 let currentPage = 1;
 let projectNum;
@@ -11,7 +11,6 @@ let startPage;
 let endPage;
 
 function toDate(date) {
-    console.log(date);
     let yyyy = date.substring(0, 4);
     let mm = date.substring(4, 6);
     let dd = date.substring(6, 8);
@@ -102,10 +101,11 @@ function loadProjects(page) {
             <span class="visually-hidden">Loading...</span>
             </div></div>`);
             $.get(ServerURL + `/api/project/project?projectId=${this.dataset.id}`).then((item) => {
-                modalTitle.html(item.title);
-                modalDate.html(toDate(item.created_at));
-                modalContent.html('');
-                modalContent.attr('src', item.url);
+                $('#md-container').load(location.href + ' #md-container', function () {
+                    modalTitle.html(item.title);
+                    modalDate.html(toDate(item.created_at));
+                    modalContent.html(`<md-block src="${item.url}"></md-block>`);
+                });
             })
             modal.css('transition', 'all 0.5s');
             modal.css('visibility', 'visible');

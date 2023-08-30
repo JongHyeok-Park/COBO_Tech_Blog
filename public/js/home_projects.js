@@ -1,6 +1,6 @@
 const modalTitle = $('.modal-title');
 const modalDate = $('.modal-date');
-const modalContent = $('md-block');
+const modalContent = $('.project-modal-content');
 const left_button = $('.control-prev');
 const right_button = $('.control-next');
 const slide = $('.silde-items-list');
@@ -93,10 +93,11 @@ $.get(ServerURL + '/api/home/project').then((result) => {
         <span class="visually-hidden">Loading...</span>
       </div></div>`);
         $.get(ServerURL + `/api/project/project?projectId=${this.dataset.id}`).then((item) => {
-            modalTitle.html(item.title);
-            modalDate.html(toDate(item.created_at));
-            modalContent.html('');
-            modalContent.attr('src', item.url);
+            $('#md-container').load(location.href + ' #md-container', function () {
+                modalTitle.html(item.title);
+                modalDate.html(toDate(item.created_at));
+                modalContent.html(`<md-block src="${item.url}"></md-block>`);
+            });
         })
         modal.css('transition', 'all 0.5s');
         modal.css('visibility', 'visible');
