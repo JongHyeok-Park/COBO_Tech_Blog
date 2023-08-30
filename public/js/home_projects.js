@@ -1,7 +1,13 @@
 const modalTitle = $('.modal-title');
 const modalDate = $('.modal-date');
 const modalContent = $('md-block');
+const left_button = $('.control-prev');
+const right_button = $('.control-next');
+const slide = $('.silde-items-list');
+const slideItem = $('.slide-item')
+let autoSlide;
 let projectNum;
+let now_position;
 
 function toDate(date) {
     let yyyy = date.substring(0, 4);
@@ -20,9 +26,13 @@ function toDate(date) {
 $.get(ServerURL + '/api/home/project').then((result) => {
     let count = 0;
 
-    projectNum = result.length
+    projectNum = result.length;
+    now_position = projectNum;
 
-    if (projectNum >= 3) {
+    if (projectNum >= 4) {
+        slide.css('width', (projectNum * 3 * 33.33333) + '%');
+        slideItem.css('width', (100 / projectNum) + '%');
+
         for (let i = 0; i < 3; i++) {
             count = (i * projectNum);
             result.forEach(item => {
@@ -54,6 +64,26 @@ $.get(ServerURL + '/api/home/project').then((result) => {
                 count += 1;
             });
         }
+        slide.css('transform', 'translateX(' + (now_position * (-(100 / (projectNum * 3)))) + '%)');
+
+        // 페이지 넘기기
+        right_button.click(function () {
+            now_position += 1;
+            setPosition(now_position);
+        })
+
+        left_button.click(function () {
+            now_position -= 1;
+            setPosition(now_position);
+        })
+
+        // 슬라이드 자동 전환 시작
+        autoSlide = setTimeout(intervalSetting, 5000);
+    } else {
+        slide.css('width', '100%');
+        slide.css('display', 'flex');
+        slide.css('justify-content', 'center');
+        slideItem.css('width', '33.333334%');
     }
 
     $('.card').click(function (e) {

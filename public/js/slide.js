@@ -1,11 +1,3 @@
-const left_button = $('.control-prev');
-const right_button = $('.control-next');
-const slide = $('.silde-items-list');
-
-// Initail Setting
-let now_position = 6;
-slide.css('transform', 'translateX(' + (now_position * (-5.55)) + '%)');
-
 function intervalSetting() {
     now_position += 1;
     setPosition(now_position);
@@ -20,7 +12,7 @@ function setPosition(position) {
     buttonDisable(true);
     clearTimeout(autoSlide);
     slide.css('transition', 'all 0.5s');
-    slide.css('transform', 'translateX(' + (position * (-5.55)) + '%)');
+    slide.css('transform', 'translateX(' + (position * (-(100 / (projectNum * 3)))) + '%)');
     setTimeout(function () {
         positionCheck();
         slide.css('transition', 'all 0s');
@@ -30,25 +22,11 @@ function setPosition(position) {
 }
 
 function positionCheck() {
-    if (now_position >= 12) {
-        now_position = 6;
-        slide.css('transform', 'translateX(' + (now_position * (-5.55)) + '%)');
+    if (now_position >= projectNum * 2) {
+        now_position = projectNum;
+        slide.css('transform', 'translateX(' + (now_position * (-(100 / (projectNum * 3)))) + '%)');
     } else if (now_position <= 0) {
-        now_position = 6;
-        slide.css('transform', 'translateX(' + (now_position * (-5.55)) + '%)');
+        now_position = projectNum;
+        slide.css('transform', 'translateX(' + (now_position * (-(100 / (projectNum * 3)))) + '%)');
     }
 }
-
-// 슬라이드 자동 전환 시작
-let autoSlide = setTimeout(intervalSetting, 5000);
-
-// 페이지 넘기기
-right_button.click(function () {
-    now_position += 1;
-    setPosition(now_position);
-})
-
-left_button.click(function () {
-    now_position -= 1;
-    setPosition(now_position);
-})
