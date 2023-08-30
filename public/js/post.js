@@ -73,16 +73,18 @@ $.get(ServerURL + `/api/tech/post?techPostId=${postId}`).then((post) => {
             $('#update').css('display', 'inline-block');
 
             $('#delete').click(function () {
-                $.ajax({
-                    type: 'DELETE',
-                    url: ServerURL + `/api/tech/post?techPostId=${postId}`,
-                    headers: {
-                        "Authorization": 'Bearer ' + getCookie('AccessToken')
-                    }
-                }).then(() => {
-                    alert('삭제 완료.');
-                    window.location.href = '/tech.html';
-                })
+                if (window.confirm('글을 삭제하시겠습니까?')) {
+                    $.ajax({
+                        type: 'DELETE',
+                        url: ServerURL + `/api/tech/post?techPostId=${postId}`,
+                        headers: {
+                            "Authorization": 'Bearer ' + getCookie('AccessToken')
+                        }
+                    }).then(() => {
+                        alert('삭제 완료.');
+                        window.location.href = '/tech.html';
+                    })
+                }
             })
 
             $('#update').click(function () {

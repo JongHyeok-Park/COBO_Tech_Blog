@@ -64,88 +64,91 @@ $.get(ServerURL + '/api/tech/skillTags').then((tags) => {
 })
 
 $('#submit').click(function () {
-    let content = editorContent.innerHTML.replace(/(<([^>]+)>)/gi, " ").replace(/&nbsp;/gi, "").substring(0, 400);
-    let title = $('.form-control').val();
-    let detail = editorContent.innerHTML;
-    let fileList = [];
-    let contentImages = editorContent.getElementsByTagName('img');
-    let userId = getCookie('UserID');
+    if (window.confirm("글을 작성하시겠습니까?")) {
+        let content = editorContent.innerHTML.replace(/(<([^>]+)>)/gi, " ").replace(/&nbsp;/gi, "").substring(0, 400);
+        let title = $('.form-control').val();
+        let detail = editorContent.innerHTML;
+        let fileList = [];
+        let contentImages = editorContent.getElementsByTagName('img');
+        let userId = getCookie('UserID');
 
-    for (let i = 0; i < contentImages.length; i++) {
-        fileList.push(contentImages[i].dataset.id)
+        for (let i = 0; i < contentImages.length; i++) {
+            fileList.push(contentImages[i].dataset.id)
+        }
+
+
+        // console.log(`제목 : ${title}`);
+        // console.log(`content : ${content}`);
+        // console.log(`detail : ${detail}`);
+        // console.log(fieldList);
+        // console.log(checkedTags);
+        // console.log(JSON.stringify({
+        //     "content": content,
+        //     "detail": detail,
+        //     "fileIdList": fieldList,
+        //     "skillTagIdList": checkedTags,
+        //     "title": title,
+        //     "userId": userId
+        // }))
+
+        loginCheck.then(() => {
+            if (method == 'POST') {
+                $.ajax({
+                    type: 'POST',
+                    url: ServerURL + '/api/tech/post',
+                    data: JSON.stringify({
+                        "content": content,
+                        "detail": detail,
+                        "fileIdList": fileList,
+                        "skillTagIdList": checkedTags,
+                        "title": title,
+                        "userId": userId
+                    }),
+                    contentType: 'application/json; charset=utf-8',
+                    headers: {
+                        "Authorization": 'Bearer ' + getCookie('AccessToken')
+                    }
+                }).then((res) => {
+                    alert('작성 완료.');
+                    window.location.href = '/tech.html';
+                }).catch((err) => {
+                    alert('작성 실패.');
+                    console.log(err);
+                })
+            } else if (method == 'PATCH') {
+                console.log('수정');
+                let deleteFileList = [];
+                deleteFileList = initialFileList.filter(item => !initialFileList.includes(item) || !fileList.includes(item));
+
+                $.ajax({
+                    type: 'PATCH',
+                    url: ServerURL + '/api/tech/post',
+                    data: JSON.stringify({
+                        "content": content,
+                        "deleteFileIdList": deleteFileList,
+                        "detail": detail,
+                        "fileIdList": fileList,
+                        "skillTagIdList": checkedTags,
+                        "title": title,
+                        "techPostId": postId
+                    }),
+                    contentType: 'application/json; charset=utf-8',
+                    headers: {
+                        "Authorization": 'Bearer ' + getCookie('AccessToken')
+                    }
+                }).then((res) => {
+                    alert('작성 완료.');
+                    window.location.href = '/tech.html';
+                }).catch((err) => {
+                    alert('작성 실패.');
+                    console.log(err);
+                })
+            }
+        }).catch(() => {
+            alert('로그인 후 이용해주세요.');
+            window.location.href = '/';
+        })
     }
 
-
-    // console.log(`제목 : ${title}`);
-    // console.log(`content : ${content}`);
-    // console.log(`detail : ${detail}`);
-    // console.log(fieldList);
-    // console.log(checkedTags);
-    // console.log(JSON.stringify({
-    //     "content": content,
-    //     "detail": detail,
-    //     "fileIdList": fieldList,
-    //     "skillTagIdList": checkedTags,
-    //     "title": title,
-    //     "userId": userId
-    // }))
-
-    loginCheck.then(() => {
-        if (method == 'POST') {
-            $.ajax({
-                type: 'POST',
-                url: ServerURL + '/api/tech/post',
-                data: JSON.stringify({
-                    "content": content,
-                    "detail": detail,
-                    "fileIdList": fileList,
-                    "skillTagIdList": checkedTags,
-                    "title": title,
-                    "userId": userId
-                }),
-                contentType: 'application/json; charset=utf-8',
-                headers: {
-                    "Authorization": 'Bearer ' + getCookie('AccessToken')
-                }
-            }).then((res) => {
-                alert('작성 완료.');
-                window.location.href = '/tech.html';
-            }).catch((err) => {
-                alert('작성 실패.');
-                console.log(err);
-            })
-        } else if (method == 'PATCH') {
-            console.log('수정');
-            let deleteFileList = [];
-            deleteFileList = initialFileList.filter(item => !initialFileList.includes(item) || !fileList.includes(item));
-
-            $.ajax({
-                type: 'PATCH',
-                url: ServerURL + '/api/tech/post',
-                data: JSON.stringify({
-                    "content": content,
-                    "deleteFileIdList": deleteFileList,
-                    "detail": detail,
-                    "fileIdList": fileList,
-                    "skillTagIdList": checkedTags,
-                    "title": title,
-                    "techPostId": postId
-                }),
-                contentType: 'application/json; charset=utf-8',
-                headers: {
-                    "Authorization": 'Bearer ' + getCookie('AccessToken')
-                }
-            }).then((res) => {
-                alert('작성 완료.');
-                window.location.href = '/tech.html';
-            }).catch((err) => {
-                alert('작성 실패.');
-                console.log(err);
-            })
-        }
-    }).catch(() => {
-        alert('로그인 후 이용해주세요.');
-        window.location.href = '/';
-    })
 })
 
