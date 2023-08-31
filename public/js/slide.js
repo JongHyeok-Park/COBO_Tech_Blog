@@ -12,7 +12,7 @@ function setPosition(position) {
     buttonDisable(true);
     clearTimeout(autoSlide);
     slide.css('transition', 'all 0.5s');
-    slide.css('transform', 'translateX(' + (position * (-(100 / (projectNum * 3)))) + '%)');
+    slide.css('transform', 'translateX(' + (-(100 / positionVar) * now_position) + '%)');
     setTimeout(function () {
         positionCheck();
         slide.css('transition', 'all 0s');
@@ -24,9 +24,9 @@ function setPosition(position) {
 function positionCheck() {
     if (now_position >= projectNum * 2) {
         now_position = projectNum;
-        slide.css('transform', 'translateX(' + (now_position * (-(100 / (projectNum * 3)))) + '%)');
+        slide.css('transform', 'translateX(' + (-(100 / positionVar)) + '%)');
     } else if (now_position <= 0) {
         now_position = projectNum;
-        slide.css('transform', 'translateX(' + (now_position * (-(100 / (projectNum * 3)))) + '%)');
+        slide.css('transform', 'translateX(' + (-(100 / positionVar)) + '%)');
     }
 }

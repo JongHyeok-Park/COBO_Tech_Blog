@@ -7,6 +7,9 @@ const slide = $('.silde-items-list');
 let autoSlide;
 let projectNum;
 let now_position;
+let count = 0;
+let positionVar;
+let mediaQ = matchMedia("screen and (max-width: 991px)");
 
 function toDate(date) {
     let yyyy = date.substring(0, 4);
@@ -22,99 +25,38 @@ function toDate(date) {
         "-" + (stringNewDate.getDate() > 9 ? stringNewDate.getDate().toString() : "0" + stringNewDate.getDate().toString());
 }
 
-$.get(ServerURL + '/api/home/project').then((result) => {
-    let count = 0;
-
-    projectNum = result.length;
-    now_position = projectNum;
-
-    if (projectNum >= 4) {
-        slide.css('width', (projectNum * 3 * 33.33333) + '%');
-        slideItem.css('width', (100 / projectNum) + '%');
-
-        for (let i = 0; i < 3; i++) {
-            count = (i * projectNum);
-            result.forEach(item => {
-                let template = `
-                <div class="slide-item">
-                    <div class="card m-auto" data-id="${item.projectId}">
-                        <div class="card-img-container">
-                            <img src="${item.imgUrl}" class="card-img-top" alt="Loading...">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">${item.title}</h5>
-                            <p class="card-text">${item.description}</p>
-                            <div class="card-tag"></div>
-                        </div>
-                    </div>
+function setProject(projects) {
+    projects.forEach(item => {
+        let template = `
+        <div class="slide-item">
+            <div class="card m-auto" data-id="${item.projectId}">
+                <div class="card-img-container">
+                    <img src="${item.imgUrl}" class="card-img-top" alt="Loading...">
                 </div>
-                `;
-
-                $('.silde-items-list').append(template);
-                item.skillTag.forEach((tag) => {
-                    let fontColor;
-                    if (tag.isBlack) {
-                        fontColor = 'black';
-                    } else {
-                        fontColor = 'white';
-                    }
-                    $('.card-tag').eq(count).append(`<span class="badge rounded-pill me-1" style="color: ${fontColor}; background: ${tag.color};">${tag.name}</span>`)
-                });
-                count += 1;
-            });
-        }
-        slide.css('transform', 'translateX(' + (now_position * (-(100 / (projectNum * 3)))) + '%)');
-
-        // 페이지 넘기기
-        right_button.click(function () {
-            now_position += 1;
-            setPosition(now_position);
-        })
-
-        left_button.click(function () {
-            now_position -= 1;
-            setPosition(now_position);
-        })
-
-        // 슬라이드 자동 전환 시작
-        autoSlide = setTimeout(intervalSetting, 5000);
-    } else {
-        slide.css('width', '100%');
-        slide.css('display', 'flex');
-        slide.css('justify-content', 'center');
-
-        result.forEach(item => {
-            let template = `
-            <div class="slide-item">
-                <div class="card m-auto" data-id="${item.projectId}">
-                    <div class="card-img-container">
-                        <img src="${item.imgUrl}" class="card-img-top" alt="Loading...">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">${item.title}</h5>
-                        <p class="card-text">${item.description}</p>
-                        <div class="card-tag"></div>
-                    </div>
+                <div class="card-body">
+                    <h5 class="card-title">${item.title}</h5>
+                    <p class="card-text">${item.description}</p>
+                    <div class="card-tag"></div>
                 </div>
             </div>
-            `;
+        </div>
+        `;
 
-            $('.silde-items-list').append(template);
-            item.skillTag.forEach((tag) => {
-                let fontColor;
-                if (tag.isBlack) {
-                    fontColor = 'black';
-                } else {
-                    fontColor = 'white';
-                }
-                $('.card-tag').eq(count).append(`<span class="badge rounded-pill me-1" style="color: ${fontColor}; background: ${tag.color};">${tag.name}</span>`)
-            });
-            count += 1;
+        $('.silde-items-list').append(template);
+        item.skillTag.forEach((tag) => {
+            let fontColor;
+            if (tag.isBlack) {
+                fontColor = 'black';
+            } else {
+                fontColor = 'white';
+            }
+            $('.card-tag').eq(count).append(`<span class="badge rounded-pill me-1" style="color: ${fontColor}; background: ${tag.color};">${tag.name}</span>`)
         });
+        count += 1;
+    });
+}
 
-        $('.slide-item').css('width', '33.333334%');
-    }
-
+function setModal() {
     $('.card').click(function (e) {
         modalTitle.html('');
         modalDate.html('');
@@ -137,6 +79,98 @@ $.get(ServerURL + '/api/home/project').then((result) => {
             modal.css('transition', 'none');
         }, 600);
     })
+}
+
+async function initialSetting(result) {
+    if (projectNum <= 1) {
+        for (let i = 0; i < 5; i++) {
+            setProject(result);
+        }
+
+        if (mediaQ.matches) {
+            slide.css('width', '500%');
+        } else {
+            slide.css('width', '166.67%');
+        }
+        $('.slide-item').css('width', '20%');
+        positionVar = 5
+
+        window.onresize = function () {
+            if (mediaQ.matches) {
+                slide.css('width', '500%');
+            } else {
+                slide.css('width', '166.67%');
+            }
+        }
+    } else if (projectNum <= 2) {
+        for (let i = 0; i < 4; i++) {
+            count = (i * projectNum);
+            setProject(result);
+        }
+
+        if (mediaQ.matches) {
+            slide.css('width', '800%');
+        } else {
+            slide.css('width', '266.67%');
+        }
+        $('.slide-item').css('width', '12.5%');
+        positionVar = 8
+
+        window.onresize = function () {
+            if (mediaQ.matches) {
+                slide.css('width', '800%');
+            } else {
+                slide.css('width', '266.67%');
+            }
+        }
+    } else {
+        for (let i = 0; i < 3; i++) {
+            count = (i * projectNum);
+            setProject(result);
+        }
+
+        if (mediaQ.matches) {
+            slide.css('width', (projectNum * 3 * 100) + '%');
+        } else {
+            slide.css('width', (projectNum * 100) + '%');
+        }
+
+        $('.slide-item').css('width', '20%');
+        positionVar = projectNum * 3;
+
+        window.onresize = function () {
+            if (mediaQ.matches) {
+                slide.css('width', (projectNum * 3 * 100) + '%');
+            } else {
+                slide.css('width', (projectNum * 100) + '%');
+            }
+        }
+    }
+
+    slide.css('transform', 'translateX(' + (-(100 / positionVar) * projectNum) + '%)');
+}
+
+$.get(ServerURL + '/api/home/project').then((result) => {
+    projectNum = result.length;
+    now_position = projectNum;
+
+    initialSetting(result)
+
+    // 페이지 넘기기
+    right_button.click(function () {
+        now_position += 1;
+        setPosition(now_position);
+    })
+
+    left_button.click(function () {
+        now_position -= 1;
+        setPosition(now_position);
+    })
+
+    // 슬라이드 자동 전환 시작
+    autoSlide = setTimeout(intervalSetting, 5000);
+
+    setModal();
 })
 
 
