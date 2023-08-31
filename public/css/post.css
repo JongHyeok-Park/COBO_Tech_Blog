@@ -80,6 +80,13 @@
     display: none;
 }
 
+blockquote {
+    background: #eee;
+    border-radius: 5px;
+    margin: 16px 0;
+    padding: 15px;
+}
+
 @media screen and (max-width: 991px) {
     .tag-list-container {
         display: none;

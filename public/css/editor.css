@@ -60,3 +60,14 @@ blockquote {
 .right-content {
     padding: 30px;
 }
+
+.editor div {
+    border-radius: 10px;
+    padding: 10px;
+    white-space: normal;
+}
+
+.editor div div {
+    border-radius: 0px;
+    padding: 0px;
+}
