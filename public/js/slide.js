@@ -24,9 +24,9 @@ function setPosition(position) {
 function positionCheck() {
     if (now_position >= projectNum * 2) {
         now_position = projectNum;
-        slide.css('transform', 'translateX(' + (-(100 / positionVar)) + '%)');
+        slide.css('transform', 'translateX(' + (-(100 / positionVar) * now_position) + '%)');
     } else if (now_position <= 0) {
         now_position = projectNum;
-        slide.css('transform', 'translateX(' + (-(100 / positionVar)) + '%)');
+        slide.css('transform', 'translateX(' + (-(100 / positionVar) * now_position) + '%)');
     }
 }
